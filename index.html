@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore our cosmic neighborhood with Space Explorer. Discover planets, extraordinary space imagery, and the wonder of our universe.">
+  <meta name="theme-color" content="#080e14">
+  <title>Space Explorer | Stay curious. Look up.</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- This checkbox pauses the decorative animation using CSS alone. -->
+  <input class="motion-input" type="checkbox" id="pause-motion">
+
+  <header class="site-header">
+    <div class="header-inner container">
+      <a class="brand" href="#home" aria-label="Space Explorer home">
+        <svg viewBox="0 0 44 44" aria-hidden="true">
+          <circle cx="22" cy="22" r="11"></circle>
+          <ellipse cx="22" cy="22" rx="21" ry="7" transform="rotate(-35 22 22)"></ellipse>
+          <circle class="brand-star" cx="34" cy="10" r="2"></circle>
+        </svg>
+        <span>SPACE<span class="brand-subtitle">EXPLORER</span></span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="#planets">Planets</a>
+        <a href="#solar-system">Solar system</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#notebook">Notebook</a>
+        <a href="#mission-control">Mission Control</a>
+      </nav>
+      <a class="header-link" href="#planets">Begin your journey <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="hero-layout container">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="status-dot"></span> FOR THE ENDLESSLY CURIOUS</p>
+          <h1 id="hero-title">A little curiosity.<br>An infinite<br><span>universe.</span></h1>
+          <p class="hero-description">Beyond our blue planet, a whole universe is waiting. Get to know our cosmic neighborhood, one discovery at a time.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#planets">Start exploring <span aria-hidden="true">↗</span></a>
+            <a class="text-link" href="#solar-system"><span class="circle-icon" aria-hidden="true">↓</span> Meet the solar system</a>
+          </div>
+          <p class="hero-note"><span aria-hidden="true">✳</span> No spaceship needed. Just your curiosity.</p>
+        </div>
+
+        <div class="hero-art">
+          <div class="hero-orbit" aria-hidden="true"></div>
+          <div class="earth-image">
+            <img src="images/earth.jpg" alt="NASA composite view of Earth showing North America, blue oceans, and swirling clouds" width="1800" height="1800" fetchpriority="high">
+          </div>
+          <p class="image-coordinate" aria-hidden="true">SOL SYSTEM / 03<br>OUR PALE BLUE DOT</p>
+          <a class="earth-marker" href="#earth">
+            <span class="status-dot"></span>
+            <span>EARTH<small>You are here</small></span>
+            <span aria-hidden="true">↗</span>
+          </a>
+          <span class="crosshair" aria-hidden="true">+</span>
+        </div>
+      </div>
+      <div class="hero-bottom container">
+        <a href="#planets" class="scroll-link"><span aria-hidden="true">↓</span> SCROLL TO DISCOVER</a>
+        <span class="hero-motto">ENDLESS WONDER. ONE SHARED HOME.</span>
+        <label class="motion-label" for="pause-motion"><span class="motion-on">Pause animation Ⅱ</span><span class="motion-off">Resume animation ▷</span></label>
+      </div>
+    </section>
+
+    <div class="facts-strip">
+      <div class="facts-inner container" aria-label="Solar system at a glance">
+        <p><strong>8</strong><span>PLANETS.<br>COUNTLESS STORIES.</span></p>
+        <span class="fact-star" aria-hidden="true">✦</span>
+        <p><strong>1</strong><span>STAR AT<br>THE CENTER.</span></p>
+        <span class="fact-star" aria-hidden="true">✦</span>
+        <p><strong>4.6<small>B</small></strong><span>YEARS IN<br>THE MAKING.</span></p>
+        <span class="fact-star" aria-hidden="true">✦</span>
+        <p><strong>∞</strong><span>REASONS TO<br>LOOK UP.</span></p>
+      </div>
+    </div>
+
+    <section class="planet-section section container" id="planets" aria-labelledby="planet-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">01 / YOUR COSMIC NEIGHBORHOOD</p><h2 id="planet-title">Every world has <span>a story.</span></h2></div>
+        <p>Three extraordinary destinations.<br>One beautiful place to start.</p>
+      </div>
+
+      <!-- Native radio controls filter the cards through the :has() CSS selector. -->
+      <fieldset class="planet-filters">
+        <legend class="visually-hidden">Filter featured planets by type</legend>
+        <input type="radio" name="planet-filter" id="all-worlds" checked>
+        <label for="all-worlds">All destinations <span>03</span></label>
+        <input type="radio" name="planet-filter" id="rocky-worlds">
+        <label for="rocky-worlds">Rocky worlds</label>
+        <input type="radio" name="planet-filter" id="giant-worlds">
+        <label for="giant-worlds">Gas giants</label>
+      </fieldset>
+
+      <div class="planet-search">
+        <label for="planet-search">Find a destination</label>
+        <input id="planet-search" type="search" maxlength="80" placeholder="Try Earth, Mars or Saturn" autocomplete="off">
+        <p id="planet-status" class="backend-status" role="status">Connecting to the planet catalogue…</p>
+      </div>
+      <noscript><p class="backend-status">Enable JavaScript to search the server catalogue and use the notebook. The original content remains available below.</p></noscript>
+
+      <div class="planet-grid">
+        <article class="planet-card rocky" id="earth">
+          <div class="card-top"><span>03 / SOL SYSTEM</span><span class="card-symbol" aria-hidden="true">⊕</span></div>
+          <div class="planet-image"><img src="images/earth.jpg" alt="Earth, our blue home planet" width="1800" height="1800" loading="lazy"></div>
+          <div class="card-copy">
+            <p class="planet-category">TERRESTRIAL PLANET</p>
+            <h3>Earth</h3>
+            <p class="planet-description">Our beautiful blue home. Unlike any other.</p>
+            <dl class="planet-stats"><div><dt>MEAN RADIUS</dt><dd>6,371 km</dd></div><div><dt>ONE YEAR</dt><dd>365.25 Earth days</dd></div></dl>
+            <details class="planet-details">
+              <summary>Get to know Earth <span aria-hidden="true">+</span></summary>
+              <div class="details-copy"><p>Earth is the only world where life has been confirmed. Liquid oceans, a protective atmosphere, and a magnetic field help make our home a remarkable place.</p><a href="https://science.nasa.gov/earth/facts/" target="_blank" rel="noopener noreferrer">Explore NASA’s Earth facts ↗<span class="visually-hidden"> (opens in a new tab)</span></a></div>
+            </details>
+          </div>
+        </article>
+
+        <article class="planet-card rocky mars" id="mars">
+          <div class="card-top"><span>04 / SOL SYSTEM</span><span class="card-symbol" aria-hidden="true">♂</span></div>
+          <div class="planet-image"><img src="images/mars.jpg" alt="Mars with its rust-colored surface and dark terrain" width="640" height="640" loading="lazy"></div>
+          <div class="card-copy">
+            <p class="planet-category">TERRESTRIAL PLANET</p>
+            <h3>Mars</h3>
+            <p class="planet-description">The red planet. The next great adventure.</p>
+            <dl class="planet-stats"><div><dt>MEAN RADIUS</dt><dd>3,390 km</dd></div><div><dt>ONE YEAR</dt><dd>687 Earth days</dd></div></dl>
+            <details class="planet-details">
+              <summary>Get to know Mars <span aria-hidden="true">+</span></summary>
+              <div class="details-copy"><p>Mars is a cold desert world with a thin atmosphere. Iron minerals give it a rusty red color. Ancient riverbeds and water-altered rocks offer clues to a wetter past.</p><a href="https://science.nasa.gov/mars/facts/" target="_blank" rel="noopener noreferrer">Explore NASA’s Mars facts ↗<span class="visually-hidden"> (opens in a new tab)</span></a></div>
+            </details>
+          </div>
+        </article>
+
+        <article class="planet-card giant saturn" id="saturn">
+          <div class="card-top"><span>06 / SOL SYSTEM</span><span class="card-symbol" aria-hidden="true">♄</span></div>
+          <div class="planet-image"><img src="images/saturn.jpg" alt="Saturn and its broad, bright ring system" width="640" height="309" loading="lazy"></div>
+          <div class="card-copy">
+            <p class="planet-category">GAS GIANT</p>
+            <h3>Saturn</h3>
+            <p class="planet-description">A world that wears its wonder in rings.</p>
+            <dl class="planet-stats"><div><dt>MEAN RADIUS</dt><dd>58,232 km</dd></div><div><dt>ONE YEAR</dt><dd>29.4 Earth years</dd></div></dl>
+            <details class="planet-details">
+              <summary>Get to know Saturn <span aria-hidden="true">+</span></summary>
+              <div class="details-copy"><p>Saturn is a gas giant surrounded by rings made mostly of ice. The Cassini spacecraft studied this extraordinary world, its rings, and its many moons.</p><a href="https://science.nasa.gov/saturn/facts/" target="_blank" rel="noopener noreferrer">Explore NASA’s Saturn facts ↗<span class="visually-hidden"> (opens in a new tab)</span></a></div>
+            </details>
+          </div>
+        </article>
+      </div>
+      <div class="section-footnote"><p><span class="status-dot"></span> Choose a world. Follow your curiosity.</p><p>Planet values are approximate · Imagery: NASA and partners</p></div>
+    </section>
+
+    <section class="solar-section section" id="solar-system" aria-labelledby="solar-title">
+      <div class="solar-layout container">
+        <div class="solar-copy"><p class="eyebrow">02 / THE BIGGER PICTURE</p><h2 id="solar-title">A star. Eight planets.<br><span>One remarkable system.</span></h2><p>Our solar system is a family of worlds held together by the Sun’s gravity. From tiny Mercury to distant Neptune, every planet follows its own path around our star.</p><p>The four inner planets are rocky. Farther out, Jupiter and Saturn are gas giants, while Uranus and Neptune are ice giants.</p><a class="button button-outline" href="https://science.nasa.gov/solar-system/planets/" target="_blank" rel="noopener noreferrer">Meet all eight planets <span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a></div>
+        <figure class="solar-figure">
+          <div class="solar-diagram" role="img" aria-label="Illustration of the Sun surrounded by eight planetary orbits; sizes and distances are not to scale">
+            <span class="sun"></span>
+            <span class="orbit orbit-1"><i></i></span><span class="orbit orbit-2"><i></i></span>
+            <span class="orbit orbit-3"><i></i></span><span class="orbit orbit-4"><i></i></span>
+            <span class="orbit orbit-5"><i></i></span><span class="orbit orbit-6"><i></i></span>
+            <span class="orbit orbit-7"><i></i></span><span class="orbit orbit-8"><i></i></span>
+          </div>
+          <figcaption><span class="status-dot"></span> OUR SOLAR SYSTEM <span>Illustration · Not to scale</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="gallery-section section container" id="gallery" aria-labelledby="gallery-title">
+      <div class="section-heading"><div><p class="eyebrow">03 / A DIFFERENT PERSPECTIVE</p><h2 id="gallery-title">A universe <span>of wonder.</span></h2></div><p>Real observations. Extraordinary places.<br>A glimpse beyond the everyday.</p></div>
+      <div class="gallery-grid">
+        <figure class="gallery-card gallery-wide">
+          <img src="images/nebula.jpg" alt="Colorful composite of the center of the Milky Way, revealing glowing gas and dense star fields" width="640" height="319" loading="lazy">
+          <figcaption><p class="eyebrow">THE MILKY WAY</p><h3>The heart of our galaxy</h3><p>A view beyond visible light.</p></figcaption>
+        </figure>
+        <figure class="gallery-card">
+          <img src="images/moon.jpg" alt="The Moon showing bright cratered highlands and darker ancient lava plains" width="640" height="640" loading="lazy">
+          <figcaption><p class="eyebrow">THE MOON</p><h3>Our closest companion</h3><p>A familiar face. A remarkable world.</p></figcaption>
+        </figure>
+        <figure class="gallery-card">
+          <img src="images/galaxy.jpg" alt="Ultraviolet image of the Andromeda galaxy highlighting hot young stars" width="640" height="640" loading="lazy">
+          <figcaption><p class="eyebrow">ANDROMEDA</p><h3>Beyond our neighborhood</h3><p>Another island of stars.</p></figcaption>
+        </figure>
+      </div>
+      <details class="image-credits"><summary>Behind the images: science &amp; credits <span aria-hidden="true">+</span></summary><div class="credits-copy"><p>Space images can reveal light our eyes cannot see. The Milky Way image combines Hubble, Spitzer, and Chandra observations; Andromeda is shown in ultraviolet light mapped to visible colors. Earth and Mars are composite views.</p><ul><li><a href="https://images.nasa.gov/details/PIA18033" target="_blank" rel="noopener noreferrer">Earth: NASA · PIA18033 ↗</a></li><li><a href="https://images.nasa.gov/details/PIA00407" target="_blank" rel="noopener noreferrer">Mars: NASA/JPL/USGS · PIA00407 ↗</a></li><li><a href="https://images.nasa.gov/details/PIA11141" target="_blank" rel="noopener noreferrer">Saturn: NASA/JPL/Space Science Institute · PIA11141 ↗</a></li><li><a href="https://images.nasa.gov/details/PIA12348" target="_blank" rel="noopener noreferrer">Milky Way: NASA/JPL-Caltech/ESA/CXC/STScI · PIA12348 ↗</a></li><li><a href="https://images.nasa.gov/details/PIA00405" target="_blank" rel="noopener noreferrer">Moon: NASA/JPL/USGS · PIA00405 ↗</a></li><li><a href="https://images.nasa.gov/details/PIA04921" target="_blank" rel="noopener noreferrer">Andromeda: NASA/JPL/California Institute of Technology · PIA04921 ↗</a></li></ul><p>Image links open the original NASA records in a new tab. This independent student project is not affiliated with or endorsed by NASA.</p></div></details>
+    </section>
+
+    <section class="section container trail-section" id="mission-control" aria-labelledby="trail-title">
+      <div class="section-heading"><div><p class="eyebrow">04 / MISSION CONTROL</p><h2 id="trail-title">Your <span>discovery trail.</span></h2></div><p>Three worlds. Three small missions.<br>Turn curiosity into something you remember.</p></div>
+      <div class="trail-dashboard">
+        <div><p class="eyebrow">EXPLORATION PROGRESS</p><p id="trail-count">Loading progress…</p><progress id="trail-progress" value="0" max="3" aria-label="Completed exploration missions"></progress></div>
+        <p id="next-mission">Your next mission is on its way.</p>
+      </div>
+      <div class="trail-toolbar"><p class="backend-status" id="mission-message" role="status">Loading missions…</p><button type="button" class="text-link" id="refresh-missions">Refresh missions ↻</button></div>
+      <div class="trail-grid" id="mission-list"></div>
+      <p class="notebook-intro">Progress is saved for this browser. Complete each objective, then mark it done. This is your own learning checklist; completion is self-reported.</p>
+    </section>
+
+    <section class="notebook-section section container" id="notebook" aria-labelledby="notebook-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">05 / YOUR NEXT DISCOVERY</p><h2 id="notebook-title">Keep an <span>exploration notebook.</span></h2></div>
+        <p>Save a question. Record a discovery.<br>Come back to it on your next visit.</p>
+      </div>
+      <p class="notebook-intro">Your notes are saved for this browser. Choose a planet and write something you want to explore or have learned.</p>
+      <div class="notebook-layout">
+        <form id="note-form" class="note-form" novalidate>
+          <h3 id="form-title">New discovery</h3>
+          <div class="form-field"><label for="note-planet">Destination</label><select id="note-planet" name="planetId" required><option value="earth">Earth</option><option value="mars">Mars</option><option value="saturn">Saturn</option></select><p class="field-error" id="error-planetId"></p></div>
+          <div class="form-field"><label for="note-title">Title <span>up to 80 characters</span></label><input id="note-title" name="title" type="text" maxlength="80" required placeholder="What makes Saturn’s rings so bright?" aria-describedby="error-title"><p class="field-error" id="error-title"></p></div>
+          <div class="form-field"><label for="note-text">Your note <span>up to 1,000 characters</span></label><textarea id="note-text" name="note" rows="4" maxlength="1000" required placeholder="Write a question, a plan or something you discovered." aria-describedby="error-note"></textarea><p class="field-error" id="error-note"></p></div>
+          <div class="form-field"><label for="note-status">Progress</label><select id="note-status" name="status" required><option value="planned">Want to explore</option><option value="explored">Explored</option></select><p class="field-error" id="error-status"></p></div>
+          <div class="form-actions"><button class="button button-primary" id="save-note" type="submit">Save discovery <span aria-hidden="true">↗</span></button><button class="text-link" id="cancel-edit" type="button" hidden>Cancel edit</button></div>
+          <p id="form-message" class="form-message" role="status"></p>
+        </form>
+        <div class="saved-notes"><div class="notes-heading"><h3>Your discoveries</h3><button class="text-link" id="refresh-notes" type="button">Refresh ↻</button></div><p id="notes-message" class="backend-status" role="status">Loading your notebook…</p><div id="notes-list"></div></div>
+      </div>
+    </section>
+
+    <section class="mission-section container" id="about" aria-labelledby="mission-title">
+      <div class="mission-symbol" aria-hidden="true">✳</div>
+      <div><p class="eyebrow">05 / OUR MISSION</p><h2 id="mission-title">Space is for <span>the curious.</span></h2><p>Space Explorer began with a simple idea: make our universe a little easier to understand, and a lot more exciting to explore. From our blue home to the rings of Saturn, every discovery is a reason to keep looking up.</p><a class="text-link" href="#home">Your journey is just beginning <span aria-hidden="true">↑</span></a></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top container"><a class="brand" href="#home"><span class="footer-orbit" aria-hidden="true">◎</span><span>SPACE<span class="brand-subtitle">EXPLORER</span></span></a><p>Stay curious. Look up.</p><a href="#home" class="text-link">Back to the stars ↑</a></div>
+    <div class="footer-bottom container"><p>© 2026 Space Explorer · Web Technology Project</p><p>Aryan Gupta &amp; Aarav Jha</p><a href="CODE.txt">View the complete project code ↗</a></div>
+  </footer>
+  <dialog id="delete-dialog" aria-labelledby="delete-title"><h2 id="delete-title">Delete this discovery?</h2><p>This will remove the note from your notebook.</p><div class="form-actions"><button class="button button-outline" id="confirm-delete" type="button">Delete note</button><button class="text-link" id="cancel-delete" type="button">Keep it</button></div><p id="delete-message" role="status"></p></dialog>
+</body>
+</html>

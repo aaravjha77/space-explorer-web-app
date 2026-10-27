@@ -1,0 +1,19 @@
+# Local database and visitor notes must never be published.
+data/
+*.sqlite
+*.sqlite-*
+*.db
+.env
+.env.*
+!.env.example
+node_modules/
+*.log
+# Academic documents, historical archives, and generated evidence are local only.
+output/
+screenshots/
+tmp/
+*.pdf
+*.zip
+README.txt
+.DS_Store
+Thumbs.db
