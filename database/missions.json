@@ -1,0 +1,5 @@
+[
+  {"id":"earth-home","planetId":"earth","title":"Understand our home","objective":"Explore Earth's facts and describe what makes our home distinctive.","condition":"Read the Earth card and save an Earth discovery in your notebook."},
+  {"id":"mars-year","planetId":"mars","title":"A year on the red planet","objective":"Compare the length of a year on Mars with Earth's year.","condition":"Read the Mars card and record your comparison in a Mars discovery."},
+  {"id":"saturn-rings","planetId":"saturn","title":"Investigate the rings","objective":"Explore Saturn and learn about its striking ring system.","condition":"Read Saturn's facts and save a Saturn discovery about its rings."}
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "earth",
+    "name": "Earth",
+    "kind": "rocky",
+    "radiusKm": 6371,
+    "year": "365.25 Earth days",
+    "description": "Earth is the only world where life has been confirmed. Liquid oceans, a protective atmosphere, and a magnetic field help make our home a remarkable place."
+  },
+  {
+    "id": "mars",
+    "name": "Mars",
+    "kind": "rocky",
+    "radiusKm": 3390,
+    "year": "687 Earth days",
+    "description": "Mars is a cold desert world with a thin atmosphere. Iron minerals give it a rusty red color. Ancient riverbeds and water-altered rocks offer clues to a wetter past."
+  },
+  {
+    "id": "saturn",
+    "name": "Saturn",
+    "kind": "giant",
+    "radiusKm": 58232,
+    "year": "29.4 Earth years",
+    "description": "Saturn is a gas giant surrounded by rings made mostly of ice. The Cassini spacecraft studied this extraordinary world, its rings, and its many moons."
+  }
+]
