@@ -83,7 +83,7 @@ h2 span { color: var(--muted); }
 .button span[aria-hidden] { font-size: 20px; line-height: 1; }
 .button-primary { color: #182015; background: var(--accent); }
 .button-primary:hover { background: #e5ffb8; }
-.button-outline { color: var(--accent); border-color: #66754d; }
+.button-outline { color: var(--accent); border-color: #66754d; background: transparent; }
 .button-outline:hover { background: #d5f6950c; }
 .text-link { display: inline-flex; align-items: center; gap: 12px; font-size: 12px; }
 .text-link:hover { color: var(--accent); }

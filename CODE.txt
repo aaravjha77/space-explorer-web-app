@@ -1,0 +1,1648 @@
+SPACE EXPLORER - COMPLETE PHASE 3 SOURCE
+Run: node server.js
+
+
+========================================================================
+FILE: index.html
+========================================================================
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore our cosmic neighborhood with Space Explorer. Discover planets, extraordinary space imagery, and the wonder of our universe.">
+  <meta name="theme-color" content="#080e14">
+  <title>Space Explorer | Stay curious. Look up.</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- This checkbox pauses the decorative animation using CSS alone. -->
+  <input class="motion-input" type="checkbox" id="pause-motion">
+
+  <header class="site-header">
+    <div class="header-inner container">
+      <a class="brand" href="#home" aria-label="Space Explorer home">
+        <svg viewBox="0 0 44 44" aria-hidden="true">
+          <circle cx="22" cy="22" r="11"></circle>
+          <ellipse cx="22" cy="22" rx="21" ry="7" transform="rotate(-35 22 22)"></ellipse>
+          <circle class="brand-star" cx="34" cy="10" r="2"></circle>
+        </svg>
+        <span>SPACE<span class="brand-subtitle">EXPLORER</span></span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="#planets">Planets</a>
+        <a href="#solar-system">Solar system</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#notebook">Notebook</a>
+        <a href="#mission-control">Mission Control</a>
+      </nav>
+      <a class="header-link" href="#planets">Begin your journey <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="hero-layout container">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="status-dot"></span> FOR THE ENDLESSLY CURIOUS</p>
+          <h1 id="hero-title">A little curiosity.<br>An infinite<br><span>universe.</span></h1>
+          <p class="hero-description">Beyond our blue planet, a whole universe is waiting. Get to know our cosmic neighborhood, one discovery at a time.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#planets">Start exploring <span aria-hidden="true">↗</span></a>
+            <a class="text-link" href="#solar-system"><span class="circle-icon" aria-hidden="true">↓</span> Meet the solar system</a>
+          </div>
+          <p class="hero-note"><span aria-hidden="true">✳</span> No spaceship needed. Just your curiosity.</p>
+        </div>
+
+        <div class="hero-art">
+          <div class="hero-orbit" aria-hidden="true"></div>
+          <div class="earth-image">
+            <img src="images/earth.jpg" alt="NASA composite view of Earth showing North America, blue oceans, and swirling clouds" width="1800" height="1800" fetchpriority="high">
+          </div>
+          <p class="image-coordinate" aria-hidden="true">SOL SYSTEM / 03<br>OUR PALE BLUE DOT</p>
+          <a class="earth-marker" href="#earth">
+            <span class="status-dot"></span>
+            <span>EARTH<small>You are here</small></span>
+            <span aria-hidden="true">↗</span>
+          </a>
+          <span class="crosshair" aria-hidden="true">+</span>
+        </div>
+      </div>
+      <div class="hero-bottom container">
+        <a href="#planets" class="scroll-link"><span aria-hidden="true">↓</span> SCROLL TO DISCOVER</a>
+        <span class="hero-motto">ENDLESS WONDER. ONE SHARED HOME.</span>
+        <label class="motion-label" for="pause-motion"><span class="motion-on">Pause animation Ⅱ</span><span class="motion-off">Resume animation ▷</span></label>
+      </div>
+    </section>
+
+    <div class="facts-strip">
+      <div class="facts-inner container" aria-label="Solar system at a glance">
+        <p><strong>8</strong><span>PLANETS.<br>COUNTLESS STORIES.</span></p>
+        <span class="fact-star" aria-hidden="true">✦</span>
+        <p><strong>1</strong><span>STAR AT<br>THE CENTER.</span></p>
+        <span class="fact-star" aria-hidden="true">✦</span>
+        <p><strong>4.6<small>B</small></strong><span>YEARS IN<br>THE MAKING.</span></p>
+        <span class="fact-star" aria-hidden="true">✦</span>
+        <p><strong>∞</strong><span>REASONS TO<br>LOOK UP.</span></p>
+      </div>
+    </div>
+
+    <section class="planet-section section container" id="planets" aria-labelledby="planet-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">01 / YOUR COSMIC NEIGHBORHOOD</p><h2 id="planet-title">Every world has <span>a story.</span></h2></div>
+        <p>Three extraordinary destinations.<br>One beautiful place to start.</p>
+      </div>
+
+      <!-- Native radio controls filter the cards through the :has() CSS selector. -->
+      <fieldset class="planet-filters">
+        <legend class="visually-hidden">Filter featured planets by type</legend>
+        <input type="radio" name="planet-filter" id="all-worlds" checked>
+        <label for="all-worlds">All destinations <span>03</span></label>
+        <input type="radio" name="planet-filter" id="rocky-worlds">
+        <label for="rocky-worlds">Rocky worlds</label>
+        <input type="radio" name="planet-filter" id="giant-worlds">
+        <label for="giant-worlds">Gas giants</label>
+      </fieldset>
+
+      <div class="planet-search">
+        <label for="planet-search">Find a destination</label>
+        <input id="planet-search" type="search" maxlength="80" placeholder="Try Earth, Mars or Saturn" autocomplete="off">
+        <p id="planet-status" class="backend-status" role="status">Connecting to the planet catalogue…</p>
+      </div>
+      <noscript><p class="backend-status">Enable JavaScript to search the server catalogue and use the notebook. The original content remains available below.</p></noscript>
+
+      <div class="planet-grid">
+        <article class="planet-card rocky" id="earth">
+          <div class="card-top"><span>03 / SOL SYSTEM</span><span class="card-symbol" aria-hidden="true">⊕</span></div>
+          <div class="planet-image"><img src="images/earth.jpg" alt="Earth, our blue home planet" width="1800" height="1800" loading="lazy"></div>
+          <div class="card-copy">
+            <p class="planet-category">TERRESTRIAL PLANET</p>
+            <h3>Earth</h3>
+            <p class="planet-description">Our beautiful blue home. Unlike any other.</p>
+            <dl class="planet-stats"><div><dt>MEAN RADIUS</dt><dd>6,371 km</dd></div><div><dt>ONE YEAR</dt><dd>365.25 Earth days</dd></div></dl>
+            <details class="planet-details">
+              <summary>Get to know Earth <span aria-hidden="true">+</span></summary>
+              <div class="details-copy"><p>Earth is the only world where life has been confirmed. Liquid oceans, a protective atmosphere, and a magnetic field help make our home a remarkable place.</p><a href="https://science.nasa.gov/earth/facts/" target="_blank" rel="noopener noreferrer">Explore NASA’s Earth facts ↗<span class="visually-hidden"> (opens in a new tab)</span></a></div>
+            </details>
+          </div>
+        </article>
+
+        <article class="planet-card rocky mars" id="mars">
+          <div class="card-top"><span>04 / SOL SYSTEM</span><span class="card-symbol" aria-hidden="true">♂</span></div>
+          <div class="planet-image"><img src="images/mars.jpg" alt="Mars with its rust-colored surface and dark terrain" width="640" height="640" loading="lazy"></div>
+          <div class="card-copy">
+            <p class="planet-category">TERRESTRIAL PLANET</p>
+            <h3>Mars</h3>
+            <p class="planet-description">The red planet. The next great adventure.</p>
+            <dl class="planet-stats"><div><dt>MEAN RADIUS</dt><dd>3,390 km</dd></div><div><dt>ONE YEAR</dt><dd>687 Earth days</dd></div></dl>
+            <details class="planet-details">
+              <summary>Get to know Mars <span aria-hidden="true">+</span></summary>
+              <div class="details-copy"><p>Mars is a cold desert world with a thin atmosphere. Iron minerals give it a rusty red color. Ancient riverbeds and water-altered rocks offer clues to a wetter past.</p><a href="https://science.nasa.gov/mars/facts/" target="_blank" rel="noopener noreferrer">Explore NASA’s Mars facts ↗<span class="visually-hidden"> (opens in a new tab)</span></a></div>
+            </details>
+          </div>
+        </article>
+
+        <article class="planet-card giant saturn" id="saturn">
+          <div class="card-top"><span>06 / SOL SYSTEM</span><span class="card-symbol" aria-hidden="true">♄</span></div>
+          <div class="planet-image"><img src="images/saturn.jpg" alt="Saturn and its broad, bright ring system" width="640" height="309" loading="lazy"></div>
+          <div class="card-copy">
+            <p class="planet-category">GAS GIANT</p>
+            <h3>Saturn</h3>
+            <p class="planet-description">A world that wears its wonder in rings.</p>
+            <dl class="planet-stats"><div><dt>MEAN RADIUS</dt><dd>58,232 km</dd></div><div><dt>ONE YEAR</dt><dd>29.4 Earth years</dd></div></dl>
+            <details class="planet-details">
+              <summary>Get to know Saturn <span aria-hidden="true">+</span></summary>
+              <div class="details-copy"><p>Saturn is a gas giant surrounded by rings made mostly of ice. The Cassini spacecraft studied this extraordinary world, its rings, and its many moons.</p><a href="https://science.nasa.gov/saturn/facts/" target="_blank" rel="noopener noreferrer">Explore NASA’s Saturn facts ↗<span class="visually-hidden"> (opens in a new tab)</span></a></div>
+            </details>
+          </div>
+        </article>
+      </div>
+      <div class="section-footnote"><p><span class="status-dot"></span> Choose a world. Follow your curiosity.</p><p>Planet values are approximate · Imagery: NASA and partners</p></div>
+    </section>
+
+    <section class="solar-section section" id="solar-system" aria-labelledby="solar-title">
+      <div class="solar-layout container">
+        <div class="solar-copy"><p class="eyebrow">02 / THE BIGGER PICTURE</p><h2 id="solar-title">A star. Eight planets.<br><span>One remarkable system.</span></h2><p>Our solar system is a family of worlds held together by the Sun’s gravity. From tiny Mercury to distant Neptune, every planet follows its own path around our star.</p><p>The four inner planets are rocky. Farther out, Jupiter and Saturn are gas giants, while Uranus and Neptune are ice giants.</p><a class="button button-outline" href="https://science.nasa.gov/solar-system/planets/" target="_blank" rel="noopener noreferrer">Meet all eight planets <span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a></div>
+        <figure class="solar-figure">
+          <div class="solar-diagram" role="img" aria-label="Illustration of the Sun surrounded by eight planetary orbits; sizes and distances are not to scale">
+            <span class="sun"></span>
+            <span class="orbit orbit-1"><i></i></span><span class="orbit orbit-2"><i></i></span>
+            <span class="orbit orbit-3"><i></i></span><span class="orbit orbit-4"><i></i></span>
+            <span class="orbit orbit-5"><i></i></span><span class="orbit orbit-6"><i></i></span>
+            <span class="orbit orbit-7"><i></i></span><span class="orbit orbit-8"><i></i></span>
+          </div>
+          <figcaption><span class="status-dot"></span> OUR SOLAR SYSTEM <span>Illustration · Not to scale</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="gallery-section section container" id="gallery" aria-labelledby="gallery-title">
+      <div class="section-heading"><div><p class="eyebrow">03 / A DIFFERENT PERSPECTIVE</p><h2 id="gallery-title">A universe <span>of wonder.</span></h2></div><p>Real observations. Extraordinary places.<br>A glimpse beyond the everyday.</p></div>
+      <div class="gallery-grid">
+        <figure class="gallery-card gallery-wide">
+          <img src="images/nebula.jpg" alt="Colorful composite of the center of the Milky Way, revealing glowing gas and dense star fields" width="640" height="319" loading="lazy">
+          <figcaption><p class="eyebrow">THE MILKY WAY</p><h3>The heart of our galaxy</h3><p>A view beyond visible light.</p></figcaption>
+        </figure>
+        <figure class="gallery-card">
+          <img src="images/moon.jpg" alt="The Moon showing bright cratered highlands and darker ancient lava plains" width="640" height="640" loading="lazy">
+          <figcaption><p class="eyebrow">THE MOON</p><h3>Our closest companion</h3><p>A familiar face. A remarkable world.</p></figcaption>
+        </figure>
+        <figure class="gallery-card">
+          <img src="images/galaxy.jpg" alt="Ultraviolet image of the Andromeda galaxy highlighting hot young stars" width="640" height="640" loading="lazy">
+          <figcaption><p class="eyebrow">ANDROMEDA</p><h3>Beyond our neighborhood</h3><p>Another island of stars.</p></figcaption>
+        </figure>
+      </div>
+      <details class="image-credits"><summary>Behind the images: science &amp; credits <span aria-hidden="true">+</span></summary><div class="credits-copy"><p>Space images can reveal light our eyes cannot see. The Milky Way image combines Hubble, Spitzer, and Chandra observations; Andromeda is shown in ultraviolet light mapped to visible colors. Earth and Mars are composite views.</p><ul><li><a href="https://images.nasa.gov/details/PIA18033" target="_blank" rel="noopener noreferrer">Earth: NASA · PIA18033 ↗</a></li><li><a href="https://images.nasa.gov/details/PIA00407" target="_blank" rel="noopener noreferrer">Mars: NASA/JPL/USGS · PIA00407 ↗</a></li><li><a href="https://images.nasa.gov/details/PIA11141" target="_blank" rel="noopener noreferrer">Saturn: NASA/JPL/Space Science Institute · PIA11141 ↗</a></li><li><a href="https://images.nasa.gov/details/PIA12348" target="_blank" rel="noopener noreferrer">Milky Way: NASA/JPL-Caltech/ESA/CXC/STScI · PIA12348 ↗</a></li><li><a href="https://images.nasa.gov/details/PIA00405" target="_blank" rel="noopener noreferrer">Moon: NASA/JPL/USGS · PIA00405 ↗</a></li><li><a href="https://images.nasa.gov/details/PIA04921" target="_blank" rel="noopener noreferrer">Andromeda: NASA/JPL/California Institute of Technology · PIA04921 ↗</a></li></ul><p>Image links open the original NASA records in a new tab. This independent student project is not affiliated with or endorsed by NASA.</p></div></details>
+    </section>
+
+    <section class="section container trail-section" id="mission-control" aria-labelledby="trail-title">
+      <div class="section-heading"><div><p class="eyebrow">04 / MISSION CONTROL</p><h2 id="trail-title">Your <span>discovery trail.</span></h2></div><p>Three worlds. Three small missions.<br>Turn curiosity into something you remember.</p></div>
+      <div class="trail-dashboard">
+        <div><p class="eyebrow">EXPLORATION PROGRESS</p><p id="trail-count">Loading progress…</p><progress id="trail-progress" value="0" max="3" aria-label="Completed exploration missions"></progress></div>
+        <p id="next-mission">Your next mission is on its way.</p>
+      </div>
+      <div class="trail-toolbar"><p class="backend-status" id="mission-message" role="status">Loading missions…</p><button type="button" class="text-link" id="refresh-missions">Refresh missions ↻</button></div>
+      <div class="trail-grid" id="mission-list"></div>
+      <p class="notebook-intro">Progress is saved for this browser. Complete each objective, then mark it done. This is your own learning checklist; completion is self-reported.</p>
+    </section>
+
+    <section class="notebook-section section container" id="notebook" aria-labelledby="notebook-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">05 / YOUR NEXT DISCOVERY</p><h2 id="notebook-title">Keep an <span>exploration notebook.</span></h2></div>
+        <p>Save a question. Record a discovery.<br>Come back to it on your next visit.</p>
+      </div>
+      <p class="notebook-intro">Your notes are saved for this browser. Choose a planet and write something you want to explore or have learned.</p>
+      <div class="notebook-layout">
+        <form id="note-form" class="note-form" novalidate>
+          <h3 id="form-title">New discovery</h3>
+          <div class="form-field"><label for="note-planet">Destination</label><select id="note-planet" name="planetId" required><option value="earth">Earth</option><option value="mars">Mars</option><option value="saturn">Saturn</option></select><p class="field-error" id="error-planetId"></p></div>
+          <div class="form-field"><label for="note-title">Title <span>up to 80 characters</span></label><input id="note-title" name="title" type="text" maxlength="80" required placeholder="What makes Saturn’s rings so bright?" aria-describedby="error-title"><p class="field-error" id="error-title"></p></div>
+          <div class="form-field"><label for="note-text">Your note <span>up to 1,000 characters</span></label><textarea id="note-text" name="note" rows="4" maxlength="1000" required placeholder="Write a question, a plan or something you discovered." aria-describedby="error-note"></textarea><p class="field-error" id="error-note"></p></div>
+          <div class="form-field"><label for="note-status">Progress</label><select id="note-status" name="status" required><option value="planned">Want to explore</option><option value="explored">Explored</option></select><p class="field-error" id="error-status"></p></div>
+          <div class="form-actions"><button class="button button-primary" id="save-note" type="submit">Save discovery <span aria-hidden="true">↗</span></button><button class="text-link" id="cancel-edit" type="button" hidden>Cancel edit</button></div>
+          <p id="form-message" class="form-message" role="status"></p>
+        </form>
+        <div class="saved-notes"><div class="notes-heading"><h3>Your discoveries</h3><button class="text-link" id="refresh-notes" type="button">Refresh ↻</button></div><p id="notes-message" class="backend-status" role="status">Loading your notebook…</p><div id="notes-list"></div></div>
+      </div>
+    </section>
+
+    <section class="mission-section container" id="about" aria-labelledby="mission-title">
+      <div class="mission-symbol" aria-hidden="true">✳</div>
+      <div><p class="eyebrow">05 / OUR MISSION</p><h2 id="mission-title">Space is for <span>the curious.</span></h2><p>Space Explorer began with a simple idea: make our universe a little easier to understand, and a lot more exciting to explore. From our blue home to the rings of Saturn, every discovery is a reason to keep looking up.</p><a class="text-link" href="#home">Your journey is just beginning <span aria-hidden="true">↑</span></a></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top container"><a class="brand" href="#home"><span class="footer-orbit" aria-hidden="true">◎</span><span>SPACE<span class="brand-subtitle">EXPLORER</span></span></a><p>Stay curious. Look up.</p><a href="#home" class="text-link">Back to the stars ↑</a></div>
+    <div class="footer-bottom container"><p>© 2026 Space Explorer · Web Technology Project</p><p>Aryan Gupta &amp; Aarav Jha</p><a href="CODE.txt">View the complete project code ↗</a></div>
+  </footer>
+  <dialog id="delete-dialog" aria-labelledby="delete-title"><h2 id="delete-title">Delete this discovery?</h2><p>This will remove the note from your notebook.</p><div class="form-actions"><button class="button button-outline" id="confirm-delete" type="button">Delete note</button><button class="text-link" id="cancel-delete" type="button">Keep it</button></div><p id="delete-message" role="status"></p></dialog>
+</body>
+</html>
+
+
+========================================================================
+FILE: style.css
+========================================================================
+/* ========================================
+   SPACE EXPLORER — FINAL INTEGRATED APPLICATION
+   1. Base and reusable styles
+   2. Header and navigation
+   3. Hero and statistics
+   4. Planet cards and CSS filters
+   5. Solar system illustration
+   6. Gallery, mission and footer
+   7. Motion and responsive layouts
+   ======================================== */
+
+:root {
+  color-scheme: dark;
+  --background: #080e14;
+  --surface: #101b23;
+  --text: #eef2ed;
+  --muted: #a0adb5;
+  --accent: #d5f695;
+  --border: #2c3941;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; scroll-padding-top: 105px; }
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+}
+h1, h2, h3, p, figure { margin: 0; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; height: auto; }
+svg { display: block; }
+a, summary, label { -webkit-tap-highlight-color: transparent; }
+a:focus-visible, summary:focus-visible, input:focus-visible + label {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
+}
+::selection { background: var(--accent); color: var(--background); }
+.container { width: min(1240px, calc(100% - 96px)); margin-inline: auto; }
+.section { padding-block: 96px; }
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  color: var(--accent);
+  font: 10px/1.6 Consolas, "Courier New", monospace;
+  letter-spacing: 1.8px;
+}
+.status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+h2 {
+  font-size: clamp(32px, 3.6vw, 50px);
+  font-weight: 450;
+  letter-spacing: -1.8px;
+  line-height: 1.15;
+}
+h2 span { color: var(--muted); }
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: 14px 23px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  transition: transform .25s, background .25s;
+}
+.button:hover { transform: translateY(-3px); }
+.button span[aria-hidden] { font-size: 20px; line-height: 1; }
+.button-primary { color: #182015; background: var(--accent); }
+.button-primary:hover { background: #e5ffb8; }
+.button-outline { color: var(--accent); border-color: #66754d; background: transparent; }
+.button-outline:hover { background: #d5f6950c; }
+.text-link { display: inline-flex; align-items: center; gap: 12px; font-size: 12px; }
+.text-link:hover { color: var(--accent); }
+.visually-hidden, .motion-input, .planet-filters input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 20px;
+  z-index: 100;
+  padding: 10px 20px;
+  color: var(--background);
+  background: var(--accent);
+}
+.skip-link:focus { top: 12px; }
+
+/* Header and navigation */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #080e14f2;
+  border-bottom: 1px solid #ffffff0d;
+  backdrop-filter: blur(16px);
+}
+.header-inner { display: flex; align-items: center; justify-content: space-between; gap: 30px; min-height: 88px; }
+.brand { display: inline-flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 750; letter-spacing: 2px; }
+.brand svg { width: 41px; height: 41px; fill: none; stroke: var(--accent); stroke-width: 1.4; }
+.brand-star { fill: var(--accent); stroke: none; }
+.brand-subtitle { display: block; color: var(--muted); font-size: 9px; font-weight: 400; letter-spacing: 3.7px; line-height: 1.3; }
+.main-nav { display: flex; flex-wrap: wrap; gap: 30px; }
+.main-nav a { position: relative; color: var(--muted); font-size: 12px; padding-block: 12px; }
+.main-nav a:hover { color: var(--accent); }
+.main-nav a::after { content: ""; position: absolute; bottom: 4px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width .25s; }
+.main-nav a:hover::after { width: 100%; }
+.header-link { padding: 10px 16px; border: 1px solid #5b6c48; border-radius: 4px; color: var(--accent); font-size: 11px; }
+.header-link span { margin-left: 18px; font-size: 17px; }
+.header-link:hover { background: #d5f6950c; }
+
+/* Hero and statistics */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background-image: radial-gradient(ellipse at 80% 55%, #19344035, transparent 65%), radial-gradient(circle, #b6cedb55 .7px, transparent 1px), radial-gradient(circle, #b6cedb35 .6px, transparent 1px);
+  background-size: auto, 139px 113px, 83px 97px;
+  background-position: center, 21px 13px, 58px 36px;
+}
+.hero-layout { display: grid; grid-template-columns: 1.04fr 1fr; align-items: center; min-height: 690px; }
+.hero-copy { position: relative; z-index: 2; padding-block: 70px; }
+h1 { margin-bottom: 28px; font-size: clamp(60px, 6.7vw, 94px); font-weight: 450; line-height: 1.05; letter-spacing: -4.5px; }
+h1 span { color: var(--accent); }
+.hero-description { max-width: 450px; color: var(--muted); font-size: 14px; line-height: 1.9; }
+.hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 27px; margin-top: 32px; }
+.circle-icon { display: grid; place-items: center; width: 28px; height: 28px; border: 1px solid #53646e; border-radius: 50%; }
+.hero-note { display: flex; align-items: center; gap: 10px; margin-top: 38px; font-size: 10px; color: #91a1ab; }
+.hero-note > span { font-size: 23px; color: var(--accent); }
+.hero-art { position: relative; display: grid; place-items: center; min-width: 0; aspect-ratio: 1; margin-right: -30px; }
+.earth-image { position: relative; width: 118%; mix-blend-mode: screen; animation: float 12s ease-in-out infinite; }
+.earth-image::after { content: ""; position: absolute; inset: 6%; border-radius: 50%; background: linear-gradient(100deg, transparent 30%, #080e1440 65%, #080e14eb 100%); }
+.hero-orbit { position: absolute; width: 111%; height: 111%; border: 1px dashed #79939b4d; border-radius: 50%; transform: rotate(-25deg) scaleY(.63); }
+.image-coordinate { position: absolute; top: 11%; right: 0; color: var(--muted); font: 9px/1.8 Consolas, monospace; letter-spacing: 1.3px; }
+.earth-marker { position: absolute; left: 0; bottom: 13%; display: flex; align-items: center; gap: 15px; width: 184px; padding: 15px 18px; border: 1px solid #47606c; border-radius: 5px; background: #101c25e8; backdrop-filter: blur(10px); font: 10px Consolas, monospace; letter-spacing: 1.2px; box-shadow: 0 16px 40px #0004; }
+.earth-marker:hover { border-color: var(--accent); }
+.earth-marker small { display: block; margin-top: 6px; font: 11px "Segoe UI", Arial, sans-serif; letter-spacing: 0; color: var(--muted); }
+.earth-marker > span:last-child { margin-left: auto; font-size: 22px; color: var(--accent); }
+.crosshair { position: absolute; top: 20%; left: 2%; color: #a9bec8; font: 24px Consolas, monospace; }
+.hero-bottom { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 18px 25px; color: #93a3ad; font: 9px Consolas, monospace; letter-spacing: 1.1px; }
+.scroll-link { display: inline-flex; align-items: center; gap: 13px; }
+.scroll-link > span { display: grid; place-items: center; width: 25px; height: 32px; border: 1px solid var(--border); border-radius: 20px; font-size: 16px; }
+.motion-label { cursor: pointer; padding: 10px 0; letter-spacing: .3px; }
+.motion-label:hover { color: var(--accent); }
+.motion-off { display: none; }
+.facts-strip { border-block: 1px solid var(--border); background: #101920; }
+.facts-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 116px; }
+.facts-inner p { display: flex; align-items: center; gap: 18px; }
+.facts-inner strong { font-size: 37px; line-height: 1; font-weight: 400; letter-spacing: -1.8px; }
+.facts-inner small { font-size: 23px; margin-left: 3px; }
+.facts-inner p > span { color: var(--muted); font: 9px/1.8 Consolas, monospace; letter-spacing: 1px; }
+.fact-star { color: #5b757f; font-size: 13px; }
+
+/* Planet cards and native CSS filters */
+.section-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; margin-bottom: 36px; }
+.section-heading > p { color: var(--muted); font-size: 13px; line-height: 1.9; }
+.planet-filters { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0 0 27px; border: 0; }
+.planet-filters label { cursor: pointer; padding: 8px 14px; border: 1px solid transparent; border-radius: 4px; color: var(--muted); font-size: 11px; }
+.planet-filters label span { margin-left: 7px; font: 9px Consolas, monospace; }
+.planet-filters label:hover { color: var(--text); }
+.planet-filters input:checked + label { color: var(--accent); border-color: #62744c; background: #d5f6950b; }
+.planet-section:has(#rocky-worlds:checked) .giant { display: none; }
+.planet-section:has(#giant-worlds:checked) .rocky { display: none; }
+.planet-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: 22px; }
+.planet-card { position: relative; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius); background: linear-gradient(140deg, #16252f, #0f1920); scroll-margin-top: 115px; transition: transform .3s, border-color .3s; }
+.planet-card:hover { transform: translateY(-5px); border-color: #688089; }
+.planet-card:target { border-color: var(--accent); }
+.card-top { position: absolute; top: 20px; left: 23px; right: 23px; display: flex; align-items: center; justify-content: space-between; z-index: 1; color: var(--muted); font: 9px Consolas, monospace; letter-spacing: 1.5px; }
+.card-symbol { font-size: 22px; color: #bed0d6; }
+.planet-image { display: grid; place-items: center; height: 255px; padding: 33px 30px 0; background: radial-gradient(ellipse at center, #8dc1ce0c, transparent 70%); }
+.planet-image img { width: 210px; height: 210px; object-fit: contain; mix-blend-mode: screen; transition: transform .6s; }
+.planet-card:hover .planet-image img { transform: scale(1.05) rotate(3deg); }
+.saturn .planet-image img { width: 100%; height: 190px; }
+.card-copy { padding: 20px 25px 24px; }
+.planet-category { display: flex; align-items: center; gap: 7px; margin-bottom: 8px; color: var(--accent); font: 9px Consolas, monospace; letter-spacing: 1.4px; }
+.planet-category::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: currentColor; }
+.mars .planet-category { color: #e9a380; }
+.saturn .planet-category { color: #deca9f; }
+.card-copy h3 { font-size: 32px; font-weight: 450; line-height: 1.3; letter-spacing: -1px; margin-bottom: 7px; }
+.planet-description { color: var(--muted); font-size: 12px; min-height: 41px; }
+.planet-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding-top: 20px; margin: 20px 0; border-top: 1px solid var(--border); }
+.planet-stats dt { margin-bottom: 6px; color: var(--muted); font: 8px Consolas, monospace; letter-spacing: 1px; }
+.planet-stats dd { margin: 0; font-size: 12px; }
+summary { cursor: pointer; list-style: none; }
+summary::-webkit-details-marker { display: none; }
+.planet-details summary, .image-credits summary { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 12px; }
+summary > span { font-size: 20px; color: var(--accent); transition: transform .25s; }
+details[open] > summary > span { transform: rotate(45deg); }
+.details-copy { padding-top: 15px; color: #bbc7ce; font-size: 12px; line-height: 1.85; }
+.details-copy a { display: inline-block; margin-top: 13px; font-size: 11px; color: var(--accent); }
+.details-copy a:hover { text-decoration: underline; }
+.section-footnote { display: flex; justify-content: space-between; gap: 15px; margin-top: 24px; color: #91a2ad; font: 9px/1.7 Consolas, monospace; }
+.section-footnote .status-dot { width: 4px; height: 4px; margin-right: 7px; }
+
+/* Solar system illustration: CSS shapes, no JavaScript */
+.solar-section { background: #0d171e; border-block: 1px solid var(--border); }
+.solar-layout { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 80px; }
+.solar-copy h2 { font-size: clamp(32px, 3.1vw, 44px); margin-bottom: 26px; }
+.solar-copy > p:not(.eyebrow) { max-width: 480px; margin-bottom: 17px; color: var(--muted); font-size: 13px; line-height: 1.95; }
+.solar-copy .button { margin-top: 15px; }
+.solar-figure { min-width: 0; padding: 27px; border: 1px solid var(--border); border-radius: var(--radius); background: radial-gradient(ellipse, #d5f69508, transparent 70%); }
+.solar-diagram { position: relative; aspect-ratio: 1; width: 100%; overflow: hidden; }
+.sun { position: absolute; top: 50%; left: 50%; width: 26px; height: 26px; transform: translate(-50%, -50%); border-radius: 50%; background: #f2cb70; box-shadow: 0 0 30px #f4b44155, 0 0 80px #f4b44122; }
+.orbit { position: absolute; top: 50%; left: 50%; width: var(--orbit-size); height: var(--orbit-size); margin-left: calc(var(--orbit-size) / -2); margin-top: calc(var(--orbit-size) / -2); border: 1px solid #b8d1d324; border-radius: 50%; transform: rotate(var(--angle)); animation: revolve var(--duration) linear infinite; }
+.orbit i { position: absolute; top: 50%; left: 0; width: var(--planet-size); height: var(--planet-size); transform: translate(-50%, -50%); border-radius: 50%; background: var(--planet-color); box-shadow: inset -3px -2px 5px #0005; }
+.orbit-1 { --orbit-size: 18%; --planet-size: 5px; --planet-color: #aaa299; --duration: 28s; --angle: 40deg; }
+.orbit-2 { --orbit-size: 29%; --planet-size: 8px; --planet-color: #d6b883; --duration: 40s; --angle: 110deg; }
+.orbit-3 { --orbit-size: 40%; --planet-size: 9px; --planet-color: #73aec8; --duration: 52s; --angle: 180deg; }
+.orbit-4 { --orbit-size: 51%; --planet-size: 7px; --planet-color: #cc8868; --duration: 65s; --angle: 230deg; }
+.orbit-5 { --orbit-size: 62%; --planet-size: 20px; --planet-color: #d4ba94; --duration: 85s; --angle: 305deg; }
+.orbit-6 { --orbit-size: 73%; --planet-size: 16px; --planet-color: #dfca99; --duration: 100s; --angle: 20deg; }
+.orbit-7 { --orbit-size: 84%; --planet-size: 12px; --planet-color: #9dcdd0; --duration: 120s; --angle: 100deg; }
+.orbit-8 { --orbit-size: 95%; --planet-size: 12px; --planet-color: #778fd1; --duration: 140s; --angle: 230deg; }
+.orbit-6 i::after { content: ""; position: absolute; inset: 30% -40%; border: 2px solid #c6b88d; border-radius: 50%; transform: rotate(-25deg); }
+.solar-figure figcaption { display: flex; align-items: center; gap: 8px; padding-top: 21px; color: var(--muted); font: 8px/1.8 Consolas, monospace; letter-spacing: 1px; }
+.solar-figure figcaption > span:last-child { margin-left: auto; letter-spacing: 0; }
+
+/* Gallery, mission and footer */
+.gallery-grid { display: grid; grid-template-columns: 1.45fr 1fr 1fr; gap: 20px; }
+.gallery-card { position: relative; min-width: 0; height: 350px; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+.gallery-card > img { width: 100%; height: 100%; object-fit: cover; opacity: .9; transition: transform .7s; }
+.gallery-card:hover > img { transform: scale(1.05); }
+.gallery-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 20%, #050b13ee 100%); }
+.gallery-card figcaption { position: absolute; left: 25px; right: 20px; bottom: 25px; z-index: 1; }
+.gallery-card .eyebrow { font-size: 9px; margin-bottom: 10px; }
+.gallery-card h3 { font-size: 23px; font-weight: 450; letter-spacing: -.6px; line-height: 1.25; }
+.gallery-card figcaption > p:last-child { font-size: 11px; margin-top: 10px; color: #bac5cc; }
+.image-credits { margin-top: 25px; }
+.image-credits summary { padding-top: 18px; color: var(--muted); font-size: 11px; }
+.credits-copy { max-width: 850px; padding: 20px 0 0; font-size: 12px; color: var(--muted); line-height: 1.9; }
+.credits-copy ul { padding-left: 18px; }
+.credits-copy a { color: var(--accent); }
+.credits-copy a:hover { text-decoration: underline; }
+.mission-section { display: grid; grid-template-columns: .4fr 1fr; gap: 40px; align-items: center; padding: 50px 60px; margin-bottom: 90px; border: 1px solid #4a5c42; border-radius: var(--radius); background: radial-gradient(ellipse at 10% 50%, #d5f6950a, transparent 65%), #101a20; }
+.mission-symbol { font-size: 160px; line-height: 1; color: var(--accent); font-family: Georgia, serif; text-align: center; }
+.mission-section h2 { margin-bottom: 21px; font-size: clamp(30px, 3.4vw, 46px); }
+.mission-section h2 span { color: var(--accent); }
+.mission-section p:not(.eyebrow) { max-width: 660px; color: #b0bec6; font-size: 13px; line-height: 1.95; }
+.mission-section .text-link { margin-top: 22px; color: var(--accent); }
+.site-footer { border-top: 1px solid var(--border); background: #0c141b; }
+.footer-top { display: flex; align-items: center; justify-content: space-between; gap: 25px; padding-block: 32px; border-bottom: 1px solid var(--border); }
+.footer-orbit { color: var(--accent); font-size: 44px; line-height: 1; }
+.footer-top > p { font-size: 20px; font-weight: 350; letter-spacing: -.5px; color: #bec9ce; }
+.footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 15px; padding-block: 22px; color: #97a8b3; font-size: 10px; }
+.footer-bottom > a:hover { color: var(--accent); }
+
+/* Motion controls: checked state applies to the main element after the checkbox. */
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-12deg); }
+  50% { transform: translateY(-12px) rotate(-10deg); }
+}
+@keyframes revolve {
+  from { transform: rotate(var(--angle)); }
+  to { transform: rotate(calc(var(--angle) + 360deg)); }
+}
+#pause-motion:checked ~ main .earth-image,
+#pause-motion:checked ~ main .orbit { animation-play-state: paused; }
+#pause-motion:checked ~ main .motion-on { display: none; }
+#pause-motion:checked ~ main .motion-off { display: inline; }
+#pause-motion:focus-visible ~ main .motion-label { outline: 2px solid var(--accent); outline-offset: 5px; }
+
+/* Tablets and small laptops */
+@media (max-width: 1050px) {
+  .container { width: calc(100% - 64px); }
+  .main-nav { gap: 22px; }
+  .header-link { display: none; }
+  .hero-layout { min-height: 620px; }
+  h1 { font-size: 72px; letter-spacing: -3.5px; }
+  .hero-copy .eyebrow { font-size: 8px; }
+  .hero-art { margin-right: -30px; }
+  .earth-image { width: 128%; }
+  .hero-description { font-size: 13px; }
+  .hero-actions { gap: 20px; }
+  .image-coordinate { top: 5%; font-size: 8px; }
+  .earth-marker { bottom: 1%; width: 168px; }
+  .facts-inner strong { font-size: 31px; }
+  .facts-inner p { gap: 13px; }
+  .facts-inner p > span { font-size: 8px; }
+  .planet-grid { gap: 16px; }
+  .planet-image { height: 215px; padding-inline: 15px; }
+  .planet-image img { width: 175px; height: 175px; }
+  .saturn .planet-image img { height: 150px; }
+  .card-copy { padding-inline: 20px; }
+  .planet-description { font-size: 11px; min-height: 42px; }
+  .planet-stats { gap: 10px; }
+  .planet-stats dd { font-size: 11px; }
+  .solar-layout { gap: 40px; }
+  .solar-figure { padding: 20px; }
+  .gallery-grid { gap: 15px; }
+  .gallery-card { height: 315px; }
+  .gallery-card figcaption { left: 20px; bottom: 23px; }
+  .gallery-card h3 { font-size: 20px; }
+  .mission-section { padding: 40px; }
+  .mission-symbol { font-size: 130px; }
+}
+
+@media (max-width: 800px) {
+  .hero-layout { min-height: 580px; grid-template-columns: 1.2fr 1fr; }
+  h1 { font-size: 61px; }
+  .hero-copy { padding-block: 55px; }
+  .hero-art { margin-right: -55px; }
+  .hero-motto { display: none; }
+  .image-coordinate { right: 15%; }
+  .facts-inner { min-height: 110px; gap: 13px; }
+  .facts-inner p { display: block; }
+  .facts-inner strong { display: block; margin-bottom: 8px; }
+  .fact-star { font-size: 10px; }
+  .section { padding-block: 70px; }
+  .section-heading > p { font-size: 11px; }
+  .section-heading h2 { font-size: 34px; }
+  .planet-image { height: 185px; }
+  .planet-image img { width: 150px; height: 150px; }
+  .saturn .planet-image img { height: 125px; }
+  .card-copy { padding: 15px; }
+  .card-copy h3 { font-size: 27px; }
+  .card-top { left: 15px; right: 15px; font-size: 8px; }
+  .planet-category { font-size: 8px; letter-spacing: .7px; }
+  .planet-stats { grid-template-columns: 1fr; gap: 12px; }
+  .planet-details summary { font-size: 10px; }
+  .section-footnote { flex-direction: column; gap: 8px; font-size: 8px; }
+  .solar-layout { gap: 25px; }
+  .solar-copy h2 { font-size: 32px; }
+  .solar-copy > p:not(.eyebrow) { font-size: 12px; }
+  .solar-figure { padding: 15px; }
+  .solar-figure figcaption { flex-wrap: wrap; font-size: 7px; letter-spacing: .6px; }
+  .solar-figure figcaption > span:last-child { width: 100%; margin: 0; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-wide { grid-column: 1 / -1; height: 300px; }
+  .gallery-card h3 { font-size: 22px; }
+  .mission-section { padding: 35px; grid-template-columns: .3fr 1fr; gap: 25px; margin-bottom: 70px; }
+  .mission-symbol { font-size: 90px; }
+  .footer-bottom { font-size: 9px; }
+}
+
+/* Phones: all navigation stays visible and every interaction remains keyboard accessible. */
+@media (max-width: 600px) {
+  html { scroll-padding-top: 25px; }
+  .container { width: calc(100% - 40px); }
+  .site-header { position: relative; }
+  .header-inner { flex-direction: column; align-items: flex-start; gap: 18px; padding-block: 20px 14px; }
+  .brand svg { width: 34px; height: 34px; }
+  .brand { font-size: 11px; }
+  .brand-subtitle { font-size: 8px; }
+  .main-nav { justify-content: space-between; width: 100%; gap: 10px; }
+  .main-nav a { font-size: 11px; padding-block: 7px; }
+  .hero-layout { display: flex; flex-direction: column; align-items: stretch; min-height: 0; }
+  .hero-copy { padding: 43px 0 0; }
+  h1 { font-size: clamp(47px, 12.2vw, 72px); letter-spacing: -2.8px; margin-bottom: 24px; }
+  .hero-copy .eyebrow { font-size: 8px; letter-spacing: 1.1px; margin-bottom: 25px; }
+  .hero-description { max-width: 420px; font-size: 13px; }
+  .hero-actions { gap: 18px; margin-top: 27px; }
+  .button { padding: 12px 18px; gap: 22px; font-size: 11px; }
+  .hero-actions .text-link { font-size: 10px; gap: 8px; }
+  .hero-note { font-size: 9px; margin-top: 25px; }
+  .hero-art { width: 100%; height: 355px; aspect-ratio: auto; margin: 5px 0 0; }
+  .earth-image { width: 370px; max-width: 111%; }
+  .hero-orbit { width: 110%; height: 100%; }
+  .image-coordinate { top: 19%; right: 0; font-size: 7px; }
+  .earth-marker { left: 1%; bottom: 10%; width: 165px; padding: 12px 15px; font-size: 9px; }
+  .crosshair { top: 25%; left: 0; }
+  .hero-bottom { padding-block: 3px 20px; font-size: 8px; }
+  .motion-label { font-size: 9px; }
+  .facts-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 15px; padding-block: 28px; }
+  .facts-inner p { display: flex; gap: 15px; }
+  .facts-inner strong { min-width: 52px; margin: 0; font-size: 31px; }
+  .facts-inner p > span { font-size: 8px; }
+  .fact-star { display: none; }
+  .section { padding-block: 58px; }
+  .section-heading { display: block; margin-bottom: 28px; }
+  .eyebrow { font-size: 8px; letter-spacing: 1.3px; margin-bottom: 15px; }
+  .section-heading h2 { font-size: 34px; letter-spacing: -1.4px; }
+  .section-heading > p { margin-top: 18px; font-size: 12px; }
+  .planet-filters { gap: 5px; margin-bottom: 24px; }
+  .planet-filters label { padding: 8px 10px; font-size: 10px; }
+  .planet-grid { grid-template-columns: 1fr; gap: 22px; }
+  .planet-card { scroll-margin-top: 20px; }
+  .planet-image { height: 255px; padding: 33px 25px 0; }
+  .planet-image img { width: 220px; height: 220px; }
+  .saturn .planet-image img { height: 190px; max-width: 380px; }
+  .card-top { top: 21px; left: 24px; right: 24px; font-size: 10px; }
+  .card-copy { padding: 20px 24px 26px; }
+  .card-copy h3 { font-size: 34px; }
+  .planet-category { font-size: 9px; letter-spacing: 1.2px; }
+  .planet-description { min-height: 0; font-size: 12px; }
+  .planet-stats { grid-template-columns: 1fr 1fr; margin-top: 24px; }
+  .planet-stats dd { font-size: 12px; }
+  .planet-details summary { font-size: 12px; }
+  .section-footnote { font-size: 8px; }
+  .solar-layout { grid-template-columns: 1fr; gap: 35px; }
+  .solar-copy h2 { font-size: 34px; }
+  .solar-copy > p:not(.eyebrow) { font-size: 13px; }
+  .solar-figure { padding: 22px; }
+  .solar-figure figcaption { font-size: 8px; }
+  .solar-figure figcaption > span:last-child { width: auto; margin-left: auto; }
+  .gallery-grid { grid-template-columns: 1fr; gap: 20px; }
+  .gallery-card, .gallery-wide { grid-column: auto; height: 290px; }
+  .gallery-card figcaption { left: 24px; bottom: 25px; }
+  .gallery-card h3 { font-size: 25px; }
+  .image-credits summary { font-size: 11px; }
+  .mission-section { grid-template-columns: 1fr; gap: 23px; padding: 30px 25px; margin-bottom: 58px; }
+  .mission-symbol { text-align: left; font-size: 72px; }
+  .mission-section h2 { font-size: 33px; }
+  .mission-section p:not(.eyebrow) { font-size: 12px; }
+  .footer-top { flex-wrap: wrap; gap: 25px; }
+  .footer-top > p { order: 3; width: 100%; font-size: 19px; }
+  .footer-top .text-link { font-size: 10px; }
+  .footer-bottom { flex-direction: column; gap: 10px; align-items: flex-start; font-size: 9px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .motion-label { display: none; }
+}
+
+/* Phase 2: server catalogue and a notebook, using the existing design tokens. */
+.planet-search { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin: -5px 0 24px; }
+.planet-search label { font-size: 12px; color: var(--muted); }
+.planet-search input { max-width: 280px; width: 100%; padding: 10px 12px; background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 4px; font: inherit; font-size: 12px; }
+.backend-status { color: var(--muted); font-size: 12px; }
+.planet-search .backend-status { margin-left: auto; }
+.notebook-section { padding-top: 0; }
+.notebook-intro { color: var(--muted); font-size: 13px; margin-bottom: 25px; }
+.notebook-layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: 28px; align-items: start; }
+.note-form, .saved-notes { padding: 28px; border: 1px solid var(--border); border-radius: var(--radius); background: #101a22; min-width: 0; }
+.note-form h3, .saved-notes h3 { font-size: 22px; font-weight: 450; margin: 0 0 20px; }
+.form-field { margin-bottom: 16px; }
+.form-field label { display: flex; justify-content: space-between; gap: 10px; font-size: 12px; margin-bottom: 6px; }
+.form-field label span { color: var(--muted); font-size: 10px; }
+.form-field input, .form-field select, .form-field textarea { box-sizing: border-box; width: 100%; color: var(--text); background: #0a131a; border: 1px solid #42535f; border-radius: 4px; padding: 11px; font: inherit; font-size: 13px; }
+.form-field textarea { resize: vertical; min-height: 115px; }
+.form-field :focus-visible, .planet-search input:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.form-field [aria-invalid="true"] { border-color: #f6a893; }
+.field-error { color: #f6b5a3; font-size: 11px; margin-top: 5px; }
+.field-error:empty { display: none; }
+.form-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
+button { cursor: pointer; font-family: inherit; }
+button.text-link { border: 0; background: none; color: var(--accent); padding: 4px 0; }
+button:disabled { opacity: .6; cursor: wait; }
+.form-message { font-size: 12px; margin-top: 14px; color: var(--accent); }
+.notes-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.notes-heading h3 { margin-bottom: 0; }
+.notes-heading + p { margin-top: 12px; }
+.saved-note { padding-top: 22px; margin-top: 22px; border-top: 1px solid var(--border); overflow-wrap: anywhere; }
+.note-tag { text-transform: uppercase; letter-spacing: 1px; color: var(--accent); font: 10px/1.7 Consolas, monospace; }
+.saved-note h4 { margin: 10px 0; font-size: 17px; font-weight: 500; }
+.note-body { white-space: pre-wrap; color: #bdcbd3; font-size: 13px; }
+.note-date { color: var(--muted); font-size: 10px; margin-top: 12px; }
+.note-actions { display: flex; gap: 20px; margin-top: 12px; }
+dialog { width: min(470px, calc(100% - 36px)); padding: 30px; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+dialog::backdrop { background: #02060bd9; }
+dialog h2 { font-size: 27px; margin-bottom: 15px; }
+dialog p { color: var(--muted); font-size: 13px; margin-bottom: 22px; }
+@media (max-width: 1050px) { .main-nav { gap: 18px; } }
+@media (max-width: 800px) { .notebook-layout { gap: 18px; } .note-form, .saved-notes { padding: 22px; } .planet-search .backend-status { width: 100%; margin: 0; } }
+@media (max-width: 600px) { .notebook-layout { grid-template-columns: 1fr; } .main-nav { justify-content: flex-start; gap: 10px 22px; } .notebook-section { padding-top: 0; } .form-field label { flex-wrap: wrap; } }
+
+/* Mission Control uses the same palette and small, readable cards. */
+button:focus-visible, progress:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+.trail-section { padding-top: 0; }
+.trail-dashboard { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 35px; padding: 25px 28px; background: linear-gradient(115deg, #1b2b2c, #101a22); border: 1px solid #53654b; border-radius: var(--radius); }
+.trail-dashboard .eyebrow { margin-bottom: 8px; }
+#trail-count { font-size: 23px; }
+#next-mission { color: var(--accent); font-size: 15px; }
+#trail-progress { display: block; width: 100%; height: 9px; margin-top: 17px; accent-color: var(--accent); border: 0; border-radius: 5px; overflow: hidden; background: #2c3941; }
+#trail-progress::-webkit-progress-bar { background: #2c3941; }
+#trail-progress::-webkit-progress-value { background: var(--accent); }
+.trail-toolbar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin: 20px 0; }
+.trail-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin-bottom: 22px; }
+.trail-card { padding: 24px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); overflow-wrap: anywhere; }
+.trail-card h3 { font-weight: 500; font-size: 21px; margin: 12px 0; line-height: 1.4; }
+.trail-card > p:not(.note-tag) { font-size: 13px; color: var(--muted); }
+.trail-card .trail-condition { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.trail-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 22px; font-size: 12px; }
+.trail-actions .button { margin-top: 4px; font-size: 12px; }
+@media (max-width: 1050px) { .main-nav { gap: 14px; flex-wrap: wrap; } .header-link { display: none; } }
+@media (max-width: 800px) { .trail-grid { grid-template-columns: 1fr; } .trail-card { padding: 24px; } .trail-actions { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 14px 24px; } }
+@media (max-width: 600px) { .trail-dashboard { grid-template-columns: 1fr; gap: 18px; padding: 22px; } #trail-count { font-size: 21px; } .trail-toolbar { align-items: flex-start; } }
+
+
+========================================================================
+FILE: app.js
+========================================================================
+'use strict';
+
+// Fetch connects the preserved frontend to the catalogue, notebook and mission API.
+const $ = selector => document.querySelector(selector);
+let notes = [];
+let editingId = null;
+let deletingId = null;
+let searchController;
+let searchTimer;
+let noteBusy = false;
+let missions = [];
+let missionBusy = false;
+const form = $('#note-form');
+const deleteDialog = $('#delete-dialog');
+
+async function request(url, options = {}) {
+  const response = await fetch(url, {
+    credentials: 'same-origin',
+    ...options,
+    headers: { ...(options.body ? { 'Content-Type': 'application/json' } : {}), ...options.headers }
+  });
+  if (response.status === 204) return null;
+  const body = await response.json();
+  if (!response.ok) {
+    const error = new Error(body.error?.message || 'The request could not be completed.');
+    error.fields = body.error?.fields || {};
+    throw error;
+  }
+  return body;
+}
+
+async function loadPlanets() {
+  searchController?.abort();
+  searchController = new AbortController();
+  const controller = searchController;
+  const selected = document.querySelector('[name="planet-filter"]:checked').id;
+  const kind = { 'all-worlds': 'all', 'rocky-worlds': 'rocky', 'giant-worlds': 'giant' }[selected];
+  const query = new URLSearchParams({ kind, q: $('#planet-search').value.trim() });
+  $('#planet-status').textContent = 'Loading destinations…';
+  $('#planets').setAttribute('aria-busy', 'true');
+  try {
+    const { planets } = await request(`/api/planets?${query}`, { signal: controller.signal });
+    const ids = new Set(planets.map(p => p.id));
+    document.querySelectorAll('.planet-card').forEach(card => { card.hidden = !ids.has(card.id); });
+    for (const planet of planets) {
+      const card = document.getElementById(planet.id);
+      card.querySelectorAll('dd')[0].textContent = planet.radiusKm.toLocaleString('en-US') + ' km';
+      card.querySelectorAll('dd')[1].textContent = planet.year;
+      card.querySelector('.details-copy p').textContent = planet.description;
+    }
+    $('#planet-status').textContent = planets.length ? `${planets.length} destination${planets.length === 1 ? '' : 's'} loaded from the server.` : 'No destinations found. Try another name or category.';
+  } catch (error) {
+    if (error.name !== 'AbortError') $('#planet-status').textContent = 'Could not load the catalogue. Start the server and try again.';
+  } finally { if (!controller.signal.aborted) $('#planets').setAttribute('aria-busy', 'false'); }
+}
+
+function makeElement(tag, className, text) {
+  const element = document.createElement(tag);
+  if (className) element.className = className;
+  if (text !== undefined) element.textContent = text;
+  return element;
+}
+
+function renderNotes() {
+  const list = $('#notes-list');
+  list.replaceChildren();
+  for (const note of notes) {
+    const article = makeElement('article', 'saved-note');
+    article.dataset.noteId = note.id;
+    article.append(makeElement('p', 'note-tag', `${note.planetName} / ${note.status === 'explored' ? 'Explored' : 'Want to explore'}`));
+    article.append(makeElement('h4', '', note.title));
+    // User text is never inserted as HTML, so markup is displayed safely as text.
+    article.append(makeElement('p', 'note-body', note.note));
+    article.append(makeElement('p', 'note-date', 'Updated ' + new Date(note.updatedAt).toLocaleString()));
+    const actions = makeElement('div', 'note-actions');
+    for (const action of ['Edit', 'Delete']) {
+      const button = makeElement('button', 'text-link', action);
+      button.type = 'button';
+      button.dataset.action = action.toLowerCase();
+      button.dataset.id = note.id;
+      button.setAttribute('aria-label', `${action} ${note.title}`);
+      actions.append(button);
+    }
+    article.append(actions);
+    list.append(article);
+  }
+  $('#notes-message').textContent = notes.length ? `${notes.length} saved discover${notes.length === 1 ? 'y' : 'ies'}.` : 'No discoveries yet. Add your first note on the left.';
+}
+
+async function loadNotes() {
+  $('#refresh-notes').disabled = true;
+  try {
+    ({ notes } = await request('/api/notes'));
+    renderNotes();
+  } catch {
+    $('#notes-message').textContent = 'Your notebook could not be loaded. Check the server, then select Refresh.';
+  } finally { $('#refresh-notes').disabled = false; }
+}
+
+function clearErrors() {
+  document.querySelectorAll('.field-error').forEach(el => { el.textContent = ''; });
+  form.querySelectorAll('[aria-invalid]').forEach(el => el.removeAttribute('aria-invalid'));
+  $('#form-message').textContent = '';
+}
+
+function resetForm() {
+  editingId = null;
+  form.reset();
+  clearErrors();
+  $('#form-title').textContent = 'New discovery';
+  $('#save-note').textContent = 'Save discovery ↗';
+  $('#cancel-edit').hidden = true;
+}
+
+form.addEventListener('submit', async event => {
+  event.preventDefault();
+  if (noteBusy) return;
+  clearErrors();
+  // Match the trimmed server rules before sending; server validation remains authoritative.
+  for (const name of ['title', 'note']) {
+    if (!form.elements.namedItem(name).value.trim()) {
+      $(`#error-${name}`).textContent = `Enter a ${name === 'note' ? 'note' : 'title'} before saving.`;
+      form.elements.namedItem(name).setAttribute('aria-invalid', 'true');
+    }
+  }
+  if (form.querySelector('[aria-invalid="true"]')) {
+    $('#form-message').textContent = 'Please correct the highlighted fields.';
+    form.querySelector('[aria-invalid="true"]').focus();
+    return;
+  }
+  noteBusy = true;
+  form.setAttribute('aria-busy', 'true');
+  $('#cancel-edit').disabled = true;
+  const button = $('#save-note');
+  button.disabled = true;
+  const value = Object.fromEntries(new FormData(form));
+  try {
+    const wasEditing = editingId !== null;
+    await request(wasEditing ? `/api/notes/${editingId}` : '/api/notes', {
+      method: wasEditing ? 'PUT' : 'POST', body: JSON.stringify(value)
+    });
+    resetForm();
+    $('#form-message').textContent = wasEditing ? 'Discovery updated.' : 'Discovery saved.';
+    await loadNotes();
+  } catch (error) {
+    $('#form-message').textContent = error.message || 'Could not save. Check the server and try again.';
+    for (const [name, message] of Object.entries(error.fields || {})) {
+      $(`#error-${name}`).textContent = message;
+      form.elements.namedItem(name)?.setAttribute('aria-invalid', 'true');
+    }
+    form.querySelector('[aria-invalid="true"]')?.focus();
+  } finally {
+    button.disabled = false; noteBusy = false;
+    $('#cancel-edit').disabled = false; form.setAttribute('aria-busy', 'false');
+  }
+});
+
+$('#notes-list').addEventListener('click', event => {
+  const button = event.target.closest('button[data-action]');
+  if (!button) return;
+  if (noteBusy) return;
+  const note = notes.find(note => note.id === Number(button.dataset.id));
+  if (!note) return;
+  if (button.dataset.action === 'edit') {
+    clearErrors();
+    editingId = note.id;
+    for (const name of ['planetId', 'title', 'note', 'status']) form.elements.namedItem(name).value = note[name];
+    $('#form-title').textContent = 'Edit discovery';
+    $('#save-note').textContent = 'Save changes ↗';
+    $('#cancel-edit').hidden = false;
+    form.scrollIntoView({ block: 'center' });
+    $('#note-title').focus({ preventScroll: true });
+  } else {
+    deletingId = note.id;
+    $('#delete-message').textContent = '';
+    deleteDialog.showModal();
+    $('#cancel-delete').focus();
+  }
+});
+
+$('#confirm-delete').addEventListener('click', async () => {
+  $('#confirm-delete').disabled = true;
+  try {
+    await request(`/api/notes/${deletingId}`, { method: 'DELETE' });
+    if (editingId === deletingId) resetForm();
+    deleteDialog.close();
+    await loadNotes();
+    $('#notes-message').textContent = `Discovery deleted. ${notes.length} remaining.`;
+    $('#refresh-notes').focus({ preventScroll: true });
+  } catch (error) { $('#delete-message').textContent = error.message || 'Could not delete. Please try again.'; }
+  finally { $('#confirm-delete').disabled = false; }
+});
+$('#cancel-delete').addEventListener('click', () => deleteDialog.close());
+$('#cancel-edit').addEventListener('click', () => { resetForm(); $('#note-title').focus(); });
+$('#refresh-notes').addEventListener('click', loadNotes);
+document.querySelectorAll('[name="planet-filter"]').forEach(input => input.addEventListener('change', loadPlanets));
+$('#planet-search').addEventListener('input', () => { clearTimeout(searchTimer); searchTimer = setTimeout(loadPlanets, 200); });
+async function visitPlanet(id) {
+  clearTimeout(searchTimer);
+  $('#all-worlds').checked = true;
+  $('#planet-search').value = '';
+  document.querySelectorAll('.planet-card').forEach(card => { card.hidden = false; });
+  await loadPlanets();
+  history.replaceState(null, '', '#' + id);
+  const card = document.getElementById(id);
+  card.scrollIntoView({ block: 'start' });
+  card.querySelector('summary').focus({ preventScroll: true });
+}
+$('.earth-marker').addEventListener('click', async event => {
+  event.preventDefault();
+  await visitPlanet('earth');
+});
+
+function renderMissions() {
+  const list = $('#mission-list');
+  list.replaceChildren();
+  const completed = missions.filter(m => m.completed).length;
+  $('#trail-count').textContent = `${completed} of ${missions.length} missions completed`;
+  $('#trail-progress').max = missions.length || 1;
+  $('#trail-progress').value = completed;
+  const next = missions.find(m => !m.completed);
+  $('#next-mission').textContent = next ? `Next mission: ${next.title}` : missions.length ? 'Trail complete. Revisit a world or record a new discovery.' : 'No missions available yet.';
+  for (const mission of missions) {
+    const card = makeElement('article', 'trail-card');
+    card.dataset.missionId = mission.id;
+    card.append(makeElement('p', 'note-tag', `${mission.planetId} / ${mission.completed ? 'Completed' : 'Ready to explore'}`));
+    card.append(makeElement('h3', '', mission.title));
+    card.append(makeElement('p', '', mission.objective));
+    card.append(makeElement('p', 'trail-condition', 'Complete when: ' + mission.condition));
+    const actions = makeElement('div', 'trail-actions');
+    for (const [action, label] of [['planet', 'Explore planet ↗'], ['notebook', 'Write a discovery ↗'], ['toggle', mission.completed ? 'Reopen mission' : 'Mark completed']]) {
+      const button = makeElement('button', action === 'toggle' ? 'button button-outline' : 'text-link', label);
+      button.type = 'button'; button.dataset.action = action;
+      if (action === 'toggle') button.setAttribute('aria-pressed', String(mission.completed));
+      actions.append(button);
+    }
+    card.append(actions); list.append(card);
+  }
+}
+async function loadMissions() {
+  if (missionBusy) return;
+  missionBusy = true;
+  $('#refresh-missions').disabled = true;
+  $('#mission-list').setAttribute('aria-busy', 'true');
+  $('#mission-message').textContent = 'Loading mission progress…';
+  try {
+    ({ missions } = await request('/api/missions'));
+    renderMissions();
+    $('#mission-message').textContent = missions.length ? 'Mission progress is up to date.' : 'No missions available yet.';
+  } catch {
+    $('#mission-message').textContent = 'Could not load mission progress. Check the server, then refresh missions.';
+  } finally {
+    missionBusy = false;
+    $('#refresh-missions').disabled = false;
+    $('#mission-list').setAttribute('aria-busy', 'false');
+  }
+}
+$('#refresh-missions').addEventListener('click', loadMissions);
+$('#mission-list').addEventListener('click', async event => {
+  const button = event.target.closest('button');
+  if (!button) return;
+  const card = button.closest('[data-mission-id]');
+  const mission = missions.find(m => m.id === card.dataset.missionId);
+  if (button.dataset.action === 'planet') return visitPlanet(mission.planetId);
+  if (button.dataset.action === 'notebook') {
+    if (noteBusy) return;
+    if (editingId !== null || $('#note-title').value || $('#note-text').value) {
+      $('#form-message').textContent = 'Save or cancel your current discovery before starting a mission note.';
+    } else { $('#note-planet').value = mission.planetId; }
+    $('#note-title').focus();
+    return;
+  }
+  if (missionBusy) return;
+  missionBusy = true;
+  button.disabled = true;
+  $('#refresh-missions').disabled = true;
+  try {
+    const result = await request(`/api/missions/${mission.id}`, { method: 'PUT', body: JSON.stringify({ completed: !mission.completed }) });
+    mission.completed = result.completed;
+    renderMissions();
+    $('#mission-message').textContent = result.completed ? 'Mission completed. Progress saved.' : 'Mission reopened. Progress saved.';
+    $(`[data-mission-id="${mission.id}"] [data-action="toggle"]`).focus({ preventScroll: true });
+  } catch {
+    $('#mission-message').textContent = 'Progress could not be saved. Please try again.';
+    button.disabled = false;
+  } finally { missionBusy = false; $('#refresh-missions').disabled = false; }
+});
+if (location.protocol === 'file:') {
+  $('#planet-status').textContent = 'Backend features need the Node server. Run node server.js and open its local URL.';
+  $('#notes-message').textContent = 'Start the Node server to use your notebook.';
+  $('#save-note').disabled = true;
+  $('#mission-message').textContent = 'Start the Node server to save mission progress.';
+} else {
+  loadPlanets();
+  // Establish the visitor cookie before another owned endpoint is requested.
+  loadNotes().then(loadMissions);
+}
+
+
+========================================================================
+FILE: server.js
+========================================================================
+'use strict';
+
+const http = require('node:http');
+const path = require('node:path');
+const { readFile } = require('node:fs/promises');
+const { randomBytes, createHash } = require('node:crypto');
+const { openDatabase } = require('./database');
+
+class HttpError extends Error {
+  constructor(status, message, fields) {
+    super(message);
+    this.status = status;
+    this.fields = fields;
+  }
+}
+
+function json(res, status, value) {
+  res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' });
+  res.end(JSON.stringify(value));
+}
+
+// Only the browser holding this random cookie can access its own notebook.
+function owner(req, res) {
+  let token = /(?:^|;\s*)space_visitor=([a-f0-9]{64})(?:;|$)/.exec(req.headers.cookie || '')?.[1];
+  if (!token) {
+    token = randomBytes(32).toString('hex');
+    res.setHeader('Set-Cookie', `space_visitor=${token}; HttpOnly; SameSite=Strict; Path=/; Max-Age=2592000`);
+  }
+  return createHash('sha256').update(token).digest('hex');
+}
+
+async function readJson(req) {
+  if (req.headers['content-type']?.split(';')[0].trim() !== 'application/json') {
+    throw new HttpError(415, 'Send JSON using Content-Type: application/json.');
+  }
+  let length = 0;
+  const chunks = [];
+  for await (const chunk of req) {
+    length += chunk.length;
+    if (length > 8192) throw new HttpError(413, 'Request body is too large (maximum 8 KB).');
+    chunks.push(chunk);
+  }
+  let value;
+  try { value = JSON.parse(Buffer.concat(chunks).toString('utf8')); }
+  catch { throw new HttpError(400, 'Request body must be valid JSON.'); }
+  if (!value || Array.isArray(value) || typeof value !== 'object') {
+    throw new HttpError(400, 'Request body must be a JSON object.');
+  }
+  return value;
+}
+
+function validateNote(value, db) {
+  const fields = {};
+  const text = key => typeof value[key] === 'string' ? value[key].trim() : '';
+  const result = { planetId: text('planetId'), title: text('title'), note: text('note'), status: text('status') };
+  if (!db.prepare('SELECT id FROM planets WHERE id = ?').get(result.planetId)) fields.planetId = 'Choose Earth, Mars or Saturn.';
+  if (!result.title || result.title.length > 80) fields.title = 'Enter a title between 1 and 80 characters.';
+  if (!result.note || result.note.length > 1000) fields.note = 'Enter a note between 1 and 1000 characters.';
+  if (!['planned', 'explored'].includes(result.status)) fields.status = 'Choose planned or explored.';
+  if (Object.keys(fields).length) throw new HttpError(422, 'Please correct the highlighted fields.', fields);
+  return result;
+}
+
+function createApplication(options = {}) {
+  const db = openDatabase(options.databasePath || process.env.DB_PATH || undefined);
+  const planetColumns = 'id, name, kind, radius_km AS radiusKm, orbital_period AS year, description';
+  const noteColumns = `n.id, n.planet_id AS planetId, p.name AS planetName, n.title, n.note,
+    n.status, n.created_at AS createdAt, n.updated_at AS updatedAt`;
+  const findNote = db.prepare(`SELECT ${noteColumns} FROM notes n JOIN planets p ON p.id=n.planet_id
+    WHERE n.id=? AND n.owner_hash=?`);
+
+  const server = http.createServer(async (req, res) => {
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+    res.setHeader('Content-Security-Policy', "default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
+    try {
+      // This classroom application is served only on loopback, not as an internet service.
+      const port = server.address()?.port;
+      const hosts = [`127.0.0.1:${port}`, `localhost:${port}`, `[::1]:${port}`];
+      if (!hosts.includes(req.headers.host)) throw new HttpError(403, 'Unrecognized host. Use the printed local URL.');
+      const url = new URL(req.url, `http://${req.headers.host}`);
+      if (!['GET', 'HEAD'].includes(req.method)) {
+        if (req.headers.origin && req.headers.origin !== url.origin) throw new HttpError(403, 'Cross-origin changes are not allowed.');
+        if (req.headers['sec-fetch-site'] === 'cross-site') throw new HttpError(403, 'Cross-site changes are not allowed.');
+      }
+      if (url.pathname === '/api/health' && req.method === 'GET') {
+        return json(res, 200, { status: 'ok', database: 'SQLite', planets: db.prepare('SELECT count(*) AS n FROM planets').get().n });
+      }
+      if (url.pathname === '/api/planets' && req.method === 'GET') {
+        const kind = url.searchParams.get('kind') || 'all';
+        const q = (url.searchParams.get('q') || '').trim();
+        if (!['all', 'rocky', 'giant'].includes(kind) || q.length > 80) throw new HttpError(400, 'Use kind=all, rocky or giant and a search up to 80 characters.');
+        const planets = db.prepare(`SELECT ${planetColumns} FROM planets
+          WHERE (?='all' OR kind=?) AND instr(lower(name), lower(?))>0 ORDER BY radius_km`).all(kind, kind, q);
+        return json(res, 200, { planets });
+      }
+      if (url.pathname === '/api/notes') {
+        const ownerHash = owner(req, res);
+        if (req.method === 'GET') {
+          const notes = db.prepare(`SELECT ${noteColumns} FROM notes n JOIN planets p ON p.id=n.planet_id
+            WHERE n.owner_hash=? ORDER BY n.id DESC`).all(ownerHash);
+          return json(res, 200, { notes });
+        }
+        if (req.method === 'POST') {
+          const value = validateNote(await readJson(req), db);
+          if (db.prepare('SELECT count(*) AS n FROM notes WHERE owner_hash=?').get(ownerHash).n >= 100) {
+            throw new HttpError(409, 'Your notebook is full (100 notes). Delete a note before adding another.');
+          }
+          const result = db.prepare('INSERT INTO notes(owner_hash,planet_id,title,note,status) VALUES(?,?,?,?,?)')
+            .run(ownerHash, value.planetId, value.title, value.note, value.status);
+          return json(res, 201, { note: findNote.get(Number(result.lastInsertRowid), ownerHash) });
+        }
+        throw new HttpError(405, 'Use GET or POST for the notebook.');
+      }
+      if (url.pathname === '/api/missions') {
+        if (req.method !== 'GET') throw new HttpError(405, 'Use GET for missions.');
+        const ownerHash = owner(req, res);
+        const missions = db.prepare(`SELECT m.id, m.planet_id AS planetId, m.title, m.objective,
+          m.condition, coalesce(p.completed,0) AS completed FROM missions m
+          LEFT JOIN mission_progress p ON p.mission_id=m.id AND p.owner_hash=? ORDER BY m.rowid`)
+          .all(ownerHash).map(m => ({ ...m, completed: Boolean(m.completed) }));
+        return json(res, 200, { missions });
+      }
+      const missionMatch = /^\/api\/missions\/([a-z0-9-]+)$/.exec(url.pathname);
+      if (missionMatch) {
+        if (req.method !== 'PUT') throw new HttpError(405, 'Use PUT to update mission progress.');
+        if (!db.prepare('SELECT id FROM missions WHERE id=?').get(missionMatch[1])) throw new HttpError(404, 'Mission not found.');
+        const value = await readJson(req);
+        if (typeof value.completed !== 'boolean' || Object.keys(value).length !== 1) {
+          throw new HttpError(422, 'Send only completed as true or false.');
+        }
+        const ownerHash = owner(req, res);
+        db.prepare(`INSERT INTO mission_progress(owner_hash,mission_id,completed) VALUES(?,?,?)
+          ON CONFLICT(owner_hash,mission_id) DO UPDATE SET completed=excluded.completed,
+          updated_at=strftime('%Y-%m-%dT%H:%M:%fZ','now')`).run(ownerHash, missionMatch[1], Number(value.completed));
+        return json(res, 200, { id: missionMatch[1], completed: value.completed });
+      }
+      const match = /^\/api\/notes\/([1-9]\d*)$/.exec(url.pathname);
+      if (match) {
+        const id = Number(match[1]);
+        const ownerHash = owner(req, res);
+        if (!Number.isSafeInteger(id) || !findNote.get(id, ownerHash)) throw new HttpError(404, 'Note not found.');
+        if (req.method === 'GET') return json(res, 200, { note: findNote.get(id, ownerHash) });
+        if (req.method === 'PUT') {
+          const value = validateNote(await readJson(req), db);
+          db.prepare(`UPDATE notes SET planet_id=?,title=?,note=?,status=?,
+            updated_at=strftime('%Y-%m-%dT%H:%M:%fZ','now') WHERE id=? AND owner_hash=?`)
+            .run(value.planetId, value.title, value.note, value.status, id, ownerHash);
+          return json(res, 200, { note: findNote.get(id, ownerHash) });
+        }
+        if (req.method === 'DELETE') {
+          db.prepare('DELETE FROM notes WHERE id=? AND owner_hash=?').run(id, ownerHash);
+          res.writeHead(204);
+          return res.end();
+        }
+        throw new HttpError(405, 'Use GET, PUT or DELETE for a note.');
+      }
+      if (url.pathname.startsWith('/api/')) throw new HttpError(404, 'API route not found.');
+      if (!['GET', 'HEAD'].includes(req.method)) throw new HttpError(405, 'This file supports GET and HEAD only.');
+      // A whitelist prevents accidental exposure of the database, PDFs, or server source.
+      const assets = new Map([
+        ['/', ['index.html', 'text/html']], ['/index.html', ['index.html', 'text/html']],
+        ['/style.css', ['style.css', 'text/css']], ['/app.js', ['app.js', 'text/javascript']],
+        ['/CODE.txt', ['CODE.txt', 'text/plain']]
+      ]);
+      for (const image of ['earth', 'mars', 'saturn', 'nebula', 'moon', 'galaxy']) {
+        assets.set(`/images/${image}.jpg`, [`images/${image}.jpg`, 'image/jpeg']);
+      }
+      const asset = assets.get(url.pathname);
+      if (!asset) throw new HttpError(404, 'Page not found.');
+      const content = await readFile(path.join(__dirname, asset[0]));
+      res.writeHead(200, { 'Content-Type': asset[1] + (asset[1].startsWith('text/') ? '; charset=utf-8' : ''), 'Content-Length': content.length });
+      res.end(req.method === 'HEAD' ? undefined : content);
+    } catch (error) {
+      if (res.headersSent) return res.end();
+      if (!(error instanceof HttpError)) console.error('Request failed:', error.message);
+      json(res, error.status || 500, { error: { message: error.status ? error.message : 'The server could not complete this request.', ...(error.fields ? { fields: error.fields } : {}) } });
+    }
+  });
+  server.requestTimeout = 10000;
+  server.on('close', () => db.close());
+  return server;
+}
+
+if (require.main === module) {
+  const port = Number(process.env.PORT ?? 3000);
+  if (!Number.isInteger(port) || port < 0 || port > 65535) throw new Error('PORT must be an integer between 0 and 65535.');
+  const server = createApplication();
+  server.on('error', error => { console.error(`Could not start server: ${error.message}`); process.exitCode = 1; });
+  server.listen(port, '127.0.0.1', () => console.log(`Space Explorer: http://127.0.0.1:${server.address().port}`));
+  for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, () => server.close());
+}
+module.exports = { createApplication };
+
+
+========================================================================
+FILE: database.js
+========================================================================
+'use strict';
+
+const { DatabaseSync } = require('node:sqlite');
+const { readFileSync, mkdirSync } = require('node:fs');
+const path = require('node:path');
+
+// SQLite creates the file on first run. Tests supply their own temporary path.
+function openDatabase(filename = path.join(__dirname, 'data', 'space-explorer.sqlite')) {
+  if (filename !== ':memory:') mkdirSync(path.dirname(filename), { recursive: true });
+  const db = new DatabaseSync(filename, { timeout: 5000 });
+  db.exec('PRAGMA journal_mode = WAL;');
+  db.exec(readFileSync(path.join(__dirname, 'database', 'schema.sql'), 'utf8'));
+  const seed = JSON.parse(readFileSync(path.join(__dirname, 'database', 'planets.json'), 'utf8'));
+  const insert = db.prepare(`INSERT INTO planets
+    (id, name, kind, radius_km, orbital_period, description) VALUES (?, ?, ?, ?, ?, ?)
+    ON CONFLICT(id) DO NOTHING`);
+  db.exec('BEGIN');
+  try {
+    for (const p of seed) insert.run(p.id, p.name, p.kind, p.radiusKm, p.year, p.description);
+    const missions = JSON.parse(readFileSync(path.join(__dirname, 'database', 'missions.json'), 'utf8'));
+    const insertMission = db.prepare(`INSERT INTO missions(id,planet_id,title,objective,condition)
+      VALUES(?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET planet_id=excluded.planet_id,
+      title=excluded.title,objective=excluded.objective,condition=excluded.condition`);
+    for (const m of missions) insertMission.run(m.id, m.planetId, m.title, m.objective, m.condition);
+    db.exec('COMMIT');
+  } catch (error) {
+    db.exec('ROLLBACK');
+    db.close();
+    throw error;
+  }
+  return db;
+}
+
+if (require.main === module) {
+  const db = openDatabase(process.env.DB_PATH || undefined);
+  console.log('Database ready; planet records:', db.prepare('SELECT count(*) AS total FROM planets').get().total);
+  db.close();
+}
+module.exports = { openDatabase };
+
+
+========================================================================
+FILE: database/schema.sql
+========================================================================
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE IF NOT EXISTS planets (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  kind TEXT NOT NULL CHECK (kind IN ('rocky', 'giant')),
+  radius_km INTEGER NOT NULL CHECK (radius_km > 0),
+  orbital_period TEXT NOT NULL,
+  description TEXT NOT NULL
+) STRICT;
+
+CREATE TABLE IF NOT EXISTS notes (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  owner_hash TEXT NOT NULL,
+  planet_id TEXT NOT NULL REFERENCES planets(id),
+  title TEXT NOT NULL CHECK (length(title) BETWEEN 1 AND 80),
+  note TEXT NOT NULL CHECK (length(note) BETWEEN 1 AND 1000),
+  status TEXT NOT NULL CHECK (status IN ('planned', 'explored')),
+  created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
+  updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
+) STRICT;
+
+CREATE INDEX IF NOT EXISTS notes_owner ON notes(owner_hash, id);
+
+CREATE TABLE IF NOT EXISTS missions (
+  id TEXT PRIMARY KEY,
+  planet_id TEXT NOT NULL REFERENCES planets(id),
+  title TEXT NOT NULL,
+  objective TEXT NOT NULL,
+  condition TEXT NOT NULL
+) STRICT;
+
+CREATE TABLE IF NOT EXISTS mission_progress (
+  owner_hash TEXT NOT NULL,
+  mission_id TEXT NOT NULL REFERENCES missions(id),
+  completed INTEGER NOT NULL CHECK (completed IN (0, 1)),
+  updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
+  PRIMARY KEY (owner_hash, mission_id)
+) STRICT;
+
+
+========================================================================
+FILE: database/planets.json
+========================================================================
+[
+  {
+    "id": "earth",
+    "name": "Earth",
+    "kind": "rocky",
+    "radiusKm": 6371,
+    "year": "365.25 Earth days",
+    "description": "Earth is the only world where life has been confirmed. Liquid oceans, a protective atmosphere, and a magnetic field help make our home a remarkable place."
+  },
+  {
+    "id": "mars",
+    "name": "Mars",
+    "kind": "rocky",
+    "radiusKm": 3390,
+    "year": "687 Earth days",
+    "description": "Mars is a cold desert world with a thin atmosphere. Iron minerals give it a rusty red color. Ancient riverbeds and water-altered rocks offer clues to a wetter past."
+  },
+  {
+    "id": "saturn",
+    "name": "Saturn",
+    "kind": "giant",
+    "radiusKm": 58232,
+    "year": "29.4 Earth years",
+    "description": "Saturn is a gas giant surrounded by rings made mostly of ice. The Cassini spacecraft studied this extraordinary world, its rings, and its many moons."
+  }
+]
+
+
+========================================================================
+FILE: database/missions.json
+========================================================================
+[
+  {"id":"earth-home","planetId":"earth","title":"Understand our home","objective":"Explore Earth's facts and describe what makes our home distinctive.","condition":"Read the Earth card and save an Earth discovery in your notebook."},
+  {"id":"mars-year","planetId":"mars","title":"A year on the red planet","objective":"Compare the length of a year on Mars with Earth's year.","condition":"Read the Mars card and record your comparison in a Mars discovery."},
+  {"id":"saturn-rings","planetId":"saturn","title":"Investigate the rings","objective":"Explore Saturn and learn about its striking ring system.","condition":"Read Saturn's facts and save a Saturn discovery about its rings."}
+]
+
+
+========================================================================
+FILE: test/server.test.js
+========================================================================
+'use strict';
+const { test } = require('node:test');
+const assert = require('node:assert/strict');
+const { mkdtemp, rm } = require('node:fs/promises');
+const os = require('node:os');
+const path = require('node:path');
+const { once } = require('node:events');
+const { createApplication } = require('../server');
+const { openDatabase } = require('../database');
+
+test('Space Explorer backend integration', async t => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'space-explorer-test-'));
+  const databasePath = path.join(directory, 'test.sqlite');
+  let server;
+  let base;
+  let cookie;
+  let savedId;
+  const valid = { planetId: 'saturn', title: 'Saturn rings', note: 'Investigate the icy ring particles.', status: 'planned' };
+  async function start() {
+    server = createApplication({ databasePath });
+    server.listen(0, '127.0.0.1');
+    await once(server, 'listening');
+    base = `http://127.0.0.1:${server.address().port}`;
+  }
+  async function stop() {
+    if (server?.listening) await new Promise(resolve => server.close(resolve));
+  }
+  async function call(route, method = 'GET', body, headers = {}) {
+    const response = await fetch(base + route, {
+      method, headers: { ...(cookie ? { Cookie: cookie } : {}), ...(body !== undefined ? { 'Content-Type': 'application/json' } : {}), ...headers },
+      ...(body !== undefined ? { body: typeof body === 'string' ? body : JSON.stringify(body) } : {})
+    });
+    return { response, body: response.status === 204 ? null : await response.json() };
+  }
+  try {
+    await start();
+    await t.test('startup, seeded database and restricted static file serving', async () => {
+      assert.deepEqual((await call('/api/health')).body, { status: 'ok', database: 'SQLite', planets: 3 });
+      const page = await fetch(base);
+      assert.equal(page.status, 200);
+      assert((await page.text()).includes('Space Explorer'));
+      assert.equal((await fetch(base + '/style.css', { method: 'HEAD' })).status, 200);
+      for (const file of ['/server.js', '/data/space-explorer.sqlite', '/README.md', '/database/missions.json', '/.env', '/output/backend/Backend_Project_Submission.pdf', '/missing', '/api/missing']) {
+        assert.equal((await fetch(base + file)).status, 404, file);
+      }
+    });
+    await t.test('server-side planet search and filtering', async () => {
+      assert.equal((await call('/api/planets')).body.planets.length, 3);
+      assert.equal((await call('/api/planets?kind=rocky')).body.planets.length, 2);
+      assert.equal((await call('/api/planets?kind=giant')).body.planets[0].id, 'saturn');
+      assert.equal((await call('/api/planets?q=MAR')).body.planets[0].id, 'mars');
+      assert.equal((await call('/api/planets?q=%25')).body.planets.length, 0);
+      assert.equal((await call('/api/planets?kind=giant&q=earth')).body.planets.length, 0);
+      assert.equal((await call('/api/planets?kind=rocky&q=earth')).body.planets[0].id, 'earth');
+      assert.equal((await call('/api/planets?kind=other')).response.status, 400);
+      assert.equal((await call('/api/planets?q=' + 'a'.repeat(81))).response.status, 400);
+    });
+    await t.test('notebook cookie and server-side validation', async () => {
+      const initial = await call('/api/notes');
+      cookie = initial.response.headers.get('set-cookie').split(';')[0];
+      assert(initial.response.headers.get('set-cookie').includes('HttpOnly; SameSite=Strict'));
+      assert.deepEqual(initial.body.notes, []);
+      const invalid = await call('/api/notes', 'POST', { planetId: 'pluto', title: ' ', note: '', status: 'wrong' });
+      assert.equal(invalid.response.status, 422);
+      assert.equal(Object.keys(invalid.body.error.fields).length, 4);
+      assert.equal((await call('/api/notes', 'POST', '{broken')).response.status, 400);
+      assert.equal((await call('/api/notes', 'POST', [])).response.status, 400);
+      assert.equal((await call('/api/notes', 'POST', valid, { 'Content-Type': 'text/plain' })).response.status, 415);
+      assert.equal((await call('/api/notes', 'POST', { ...valid, title: 'x'.repeat(81) })).response.status, 422);
+      assert.equal((await call('/api/notes', 'POST', { ...valid, note: 'x'.repeat(1001) })).response.status, 422);
+      assert.equal((await call('/api/notes', 'POST', { ...valid, note: 'x'.repeat(9000) })).response.status, 413);
+      assert.equal((await call('/api/notes')).body.notes.length, 0);
+    });
+    await t.test('create, retrieve, update and owner isolation', async () => {
+      const created = await call('/api/notes', 'POST', { ...valid, title: '  Saturn rings  ' });
+      assert.equal(created.response.status, 201);
+      savedId = created.body.note.id;
+      assert.equal(created.body.note.title, 'Saturn rings');
+      assert.equal((await call(`/api/notes/${savedId}`)).body.note.planetName, 'Saturn');
+      const updated = await call(`/api/notes/${savedId}`, 'PUT', { ...valid, status: 'explored', note: "Ice particles; '); DROP TABLE planets; --" });
+      assert.equal(updated.body.note.status, 'explored');
+      assert.equal((await call('/api/health')).body.planets, 3);
+      const other = await fetch(base + '/api/notes');
+      assert.deepEqual((await other.json()).notes, []);
+      assert.equal((await fetch(base + `/api/notes/${savedId}`)).status, 404);
+      assert.equal((await fetch(base + `/api/notes/${savedId}`, { method: 'DELETE' })).status, 404);
+    });
+    await t.test('database persists across an actual server restart', async () => {
+      await stop();
+      await start();
+      const notes = (await call('/api/notes')).body.notes;
+      assert.equal(notes.length, 1);
+      assert.equal(notes[0].id, savedId);
+      assert.equal(notes[0].status, 'explored');
+    });
+    await t.test('mission definitions, validation, isolation and durable progress', async () => {
+      const initial = (await call('/api/missions')).body.missions;
+      assert.equal(initial.length, 3);
+      assert(initial.every(m => m.completed === false && m.condition && m.objective));
+      const route = '/api/missions/' + initial[0].id;
+      for (const value of [{ completed: 1 }, { completed: 'true' }, {}, { completed: true, owner: 'other' }]) {
+        assert.equal((await call(route, 'PUT', value)).response.status, 422);
+      }
+      assert.equal((await call('/api/missions/unknown', 'PUT', { completed: true })).response.status, 404);
+      assert.equal((await call(route, 'DELETE')).response.status, 405);
+      assert.equal((await call('/api/missions', 'POST', {})).response.status, 405);
+      assert.equal((await call(route, 'PUT', { completed: true }, { Origin: 'https://example.com' })).response.status, 403);
+      assert.equal((await call(route, 'PUT', { completed: true })).response.status, 200);
+      const separate = await fetch(base + '/api/missions');
+      const otherCookie = separate.headers.get('set-cookie').split(';')[0];
+      assert((await separate.json()).missions.every(m => !m.completed));
+      await fetch(base + route, { method: 'PUT', headers: { Cookie: otherCookie, 'Content-Type': 'application/json' }, body: JSON.stringify({ completed: false }) });
+      assert.equal((await call('/api/missions')).body.missions[0].completed, true);
+      await stop(); await start();
+      assert.equal((await call('/api/missions')).body.missions[0].completed, true);
+      for (let i = 0; i < 6; i++) await call(route, 'PUT', { completed: Boolean(i % 2) });
+      assert.equal((await call('/api/missions')).body.missions[0].completed, true);
+      await call(route, 'PUT', { completed: false });
+      await stop(); await start();
+      assert.equal((await call('/api/missions')).body.missions[0].completed, false);
+      assert.equal((await call('/api/notes')).body.notes[0].id, savedId);
+      const inspect = openDatabase(databasePath);
+      assert.equal(inspect.prepare('PRAGMA integrity_check').get().integrity_check, 'ok');
+      assert.equal(inspect.prepare('PRAGMA foreign_key_check').all().length, 0);
+      inspect.close();
+    });
+    await t.test('cross-origin writes, unsupported methods and missing records', async () => {
+      assert.equal((await call('/api/notes', 'POST', valid, { Origin: 'https://example.com' })).response.status, 403);
+      assert.equal((await call('/api/notes', 'POST', valid, { 'Sec-Fetch-Site': 'cross-site' })).response.status, 403);
+      assert.equal((await call('/api/notes', 'PATCH', valid)).response.status, 405);
+      assert.equal((await call('/api/notes/999999')).response.status, 404);
+      assert.equal((await call(`/api/notes/${savedId}`, 'PUT', { ...valid, title: '' })).response.status, 422);
+    });
+    await t.test('delete and confirm durable removal', async () => {
+      assert.equal((await call(`/api/notes/${savedId}`, 'DELETE')).response.status, 204);
+      assert.equal((await call(`/api/notes/${savedId}`)).response.status, 404);
+      await stop();
+      await start();
+      assert.equal((await call('/api/notes')).body.notes.length, 0);
+    });
+  } finally {
+    await stop();
+    if (path.dirname(directory) !== os.tmpdir()) throw new Error('Unexpected test directory');
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+
+========================================================================
+FILE: test/browser-checklist.md
+========================================================================
+# Phase 3 browser regression checklist
+
+Verified through the in-app Chromium browser on 27 October 2026 against the real Node server and a separate test SQLite file. This is a repeatable manual browser suite; it is not included in the Node test count.
+
+1. Load the page. Confirm three API-backed planet cards, notebook and three missions load. Check all six images render.
+2. Select Gas giants, search Earth: expect no results. Click the Earth shortcut: expect All destinations, an empty search, three cards and keyboard focus on Earth's facts. Repeat with a mission's Explore planet control and a different planet. **Earth shortcut regression: retain this check.**
+3. Search MAR: expect only Mars. Clear search: expect all three. Use Rocky worlds with search: both constraints must apply.
+4. Submit an empty notebook form: expect field errors and focus on the first invalid field. API tests separately verify server-generated HTTP 422 errors.
+5. Use a mission's Write a discovery button: expect its destination selected. Save a nonempty note, edit the text and progress, and reload: expect the updated record.
+6. Open Delete, choose Keep it: record remains. Confirm Delete: record disappears. Reload: it remains deleted.
+7. Save literal HTML/script markup as text: no image or script element must appear in the notebook. Delete the test record.
+8. Complete a mission: expect 1 of 3, matching progress and the first remaining mission recommendation. Reopen and complete it again. Reload: progress persists.
+9. Stop the Node process. Refresh missions and notebook: expect clear failure messages, no fake success and no discarded displayed records. Restart with the same DB_PATH and port; refresh both: saved progress and notes return.
+10. Inspect widths 320, 390, 768, 1024 and 1440: document width must not exceed viewport width. Check the mobile Mission Control layout.
+11. Use Enter on the gallery credits summary and planet facts. Check focus is visible. Toggle Pause animation: the Earth image and orbit animations pause. All navigation targets must exist.
+12. Check browser logs for JavaScript errors. Expected failed resource requests during the deliberate outage are not successful API operations.
+
+API tests cover independent browser-cookie ownership, invalid mission payloads, repeated progress writes, notebook isolation, restart persistence and SQL-safe values. No Firefox, Safari, physical-device or public-hosting claim is made.
+
+
+========================================================================
+FILE: package.json
+========================================================================
+{
+  "name": "space-explorer",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Space Explorer: planets, a persistent exploration notebook and Mission Control discovery trail.",
+  "engines": { "node": ">=24.15.0" },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/server.test.js",
+    "db:init": "node database.js"
+  }
+}
+
+
+========================================================================
+FILE: .gitignore
+========================================================================
+# Local database and visitor notes must never be published.
+data/
+*.sqlite
+*.sqlite-*
+*.db
+.env
+.env.*
+!.env.example
+node_modules/
+*.log
+# Academic documents, historical archives, and generated evidence are local only.
+output/
+screenshots/
+tmp/
+*.pdf
+*.zip
+README.txt
+.DS_Store
+Thumbs.db
+
+
+========================================================================
+FILE: images/credits.json
+========================================================================
+[
+  {
+    "file": "earth.jpg",
+    "id": "PIA18033",
+    "title": "Earth",
+    "credit": "NASA",
+    "source": "https://images.nasa.gov/details/PIA18033",
+    "download": "https://images-assets.nasa.gov/image/PIA18033/PIA18033~orig.jpg"
+  },
+  {
+    "file": "mars.jpg",
+    "id": "PIA00407",
+    "title": "Global Color Views of Mars",
+    "credit": "NASA/JPL/USGS",
+    "source": "https://images.nasa.gov/details/PIA00407",
+    "download": "https://images-assets.nasa.gov/image/PIA00407/PIA00407~thumb.jpg"
+  },
+  {
+    "file": "saturn.jpg",
+    "id": "PIA11141",
+    "title": "Saturn … Four Years On",
+    "credit": "NASA/JPL/Space Science Institute",
+    "source": "https://images.nasa.gov/details/PIA11141",
+    "download": "https://images-assets.nasa.gov/image/PIA11141/PIA11141~thumb.jpg"
+  },
+  {
+    "file": "nebula.jpg",
+    "id": "PIA12348",
+    "title": "Great Observatories Unique Views of the Milky Way",
+    "credit": "NASA/JPL-Caltech/ESA/CXC/STScI",
+    "source": "https://images.nasa.gov/details/PIA12348",
+    "download": "https://images-assets.nasa.gov/image/PIA12348/PIA12348~thumb.jpg"
+  },
+  {
+    "file": "moon.jpg",
+    "id": "PIA00405",
+    "title": "Earth Moon",
+    "credit": "NASA/JPL/USGS",
+    "source": "https://images.nasa.gov/details/PIA00405",
+    "download": "https://images-assets.nasa.gov/image/PIA00405/PIA00405~thumb.jpg"
+  },
+  {
+    "file": "galaxy.jpg",
+    "id": "PIA04921",
+    "title": "Andromeda Galaxy",
+    "credit": "NASA/JPL/California Institute of Technology",
+    "source": "https://images.nasa.gov/details/PIA04921",
+    "download": "https://images-assets.nasa.gov/image/PIA04921/PIA04921~thumb.jpg"
+  }
+]
+
